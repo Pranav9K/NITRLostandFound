@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIT Rourkela - Lost & Found</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Corrected the Google Fonts link -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            
+            /* --- FIX FOR BACKGROUND IMAGE --- */
+            background-image: url("https://i.imghippo.com/files/PO2471Go.jpg");
+            background-color: #000; /* Fallback color */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            background-size: cover;       /* Ensures the image covers the whole page */
+            background-position: center;  /* Centers the image */
+            background-attachment: fixed; /* Keeps the background still on scroll */
+            
+            margin: 0; /* Also good practice to reset margin/padding */
+            padding: 0;
+        }
+
+        header {
+             padding-top: 1rem;
+             padding-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1500px; 
+            margin-left: auto; 
+            margin-right: auto;
+            padding-left: 25px; 
+            padding-right: 25px; 
+        }
+
+        nav {
+        border-radius: 50px;
+        background-color: black;
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 25px;
+        width: 80%;
+    margin: auto;  /* Centers nav */
+}
+
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+
+        .logo-image {
+            width: 48px;
+            height: 48px;
+            margin-right: 12px;
+        }
+        
+        .logo-text h1 {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: white;
+            margin: 0;
+        }
+
+        .logo-text p {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin: 0;
+        }
+
+        .nav-links {
+            font-weight: 700;
+            font-size: 1.25rem;
+            display: none; 
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #828890;
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+            margin-left: 2rem;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .action-button {
+            background-image: linear-gradient(to right, #b53300, #8d2d01);
+            color: white;
+            font-weight: 700;
+            padding: 0.75rem 1.5rem; 
+            font-size: 1rem;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s ease-in-out;
+            display: flex;
+            align-items: center;
+        }
+
+        .action-button:hover {
+            opacity: 0.8;
+        }
+
+        .action-button span {
+            margin-left: 8px;
+        }
+
+    
+        main {
+            padding-top: 50px;
+            padding-bottom: 50px;
+            text-align: center;
+        }
+
+        .hamburger {
+            display: block;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+        }
+
+        .main-content {
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+      
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+            .main-content h2 {
+                font-size: 3rem;
+            }
+            .hamburger {
+                display: none;
+        }
+        }
+
+    </style>
+
+    
+</head>
+<body>
+
+    <!-- Header and Navigation Bar -->
+    <header>
+        <nav class="container">
+            
+            <!-- Left Side: Logo and Title -->
+            <div class="logo-container">
+                <!-- Replaced the SVG with the image you provided -->
+                <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/NIT_Rourkela_Colour_Logo.svg" class="logo-image">
+                <div class="logo-text">
+                    <h1>NIT Rourkela</h1>
+                    <p>Lost & Found</p>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="#">Lost Items</a>
+                <a href="#">Found Items</a>
+            </div>
+
+            <div>
+                <button class="action-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    <span>Post Item</span>
+                </button>
+            </div>
+
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container">
+        <div class="main-content">
+        </div>
+    </main>
+
+     <script>
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("nav-links");
+
+    hamburger.addEventListener("click", () => {
+      navLinks.style.display = navLinks.style.display === "flex" ? "none" : "flex";
+    });
+  </script>
+
+</body>
+</html>
+
