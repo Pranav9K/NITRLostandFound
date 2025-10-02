@@ -1,180 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NIT Rourkela - Lost & Found</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NIT Rourkela - Lost & Found</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+  <style>
+    /* Reset & font */
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
 
-        /* Full-page background wrapper */
-        .bg-wrapper {
-            background-image: url("https://i.imghippo.com/files/PO2471Go.jpg");
-            background-color: #000;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-            min-height: 100vh; /* always fills screen */
-        }
+    /* Background */
+    .bg-wrapper {
+      background-image: url("https://i.imghippo.com/files/PO2471Go.jpg");
+      background-color: #000;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+    }
 
-        header {
-             padding-top: 1rem;
-             padding-bottom: 1rem;
-        }
+    /* Container */
+    .container {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 0 25px;
+    }
 
-        .container {
-            max-width: 1500px; 
-            margin-left: auto; 
-            margin-right: auto;
-            padding-left: 25px; 
-            padding-right: 25px; 
-        }
+    /* Header & Nav */
+    nav {
+      border-radius: 50px;
+      background-color: black;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 25px;
+      width: 80%;
+      margin: 0 auto;
+      position: relative;
+    }
 
-        nav {
-            border-radius: 50px;
-            background-color: black;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 15px;
-            padding-bottom: 15px;
-            width: 80%;
-        }
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
+    .logo-image {
+      width: 48px;
+      height: 48px;
+      margin-right: 12px;
+    }
 
-        .logo-image {
-            width: 48px;
-            height: 48px;
-            margin-right: 12px;
-        }
-        
-        .logo-text h1 {
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: white;
-            margin: 0;
-        }
+    .logo-text h1 {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: white;
+      margin: 0;
+    }
 
-        .logo-text p {
-            font-size: 0.875rem;
-            color: #9ca3af;
-            margin: 0;
-        }
+    .logo-text p {
+      font-size: 0.875rem;
+      color: #9ca3af;
+      margin: 0;
+    }
 
-        .nav-links {
-            font-weight: 700;
-            font-size: 1.25rem;
-            display: none; 
-            flex-direction: column;
-            background-color: black;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            width: 100%;
-            border-radius: 0 0 15px 15px;
-            text-align: center;
-            padding: 10px 0;
-            z-index: 10;
-        }
+    /* Nav links */
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: black;
+      text-align: center;
+      padding: 10px 0;
+      border-radius: 0 0 15px 15px;
+      z-index: 100;
+    }
 
-        .nav-links a {
-            color: #828890;
-            text-decoration: none;
-            transition: color 0.2s ease-in-out;
-            margin: 10px 0;
-            display: block;
-        }
+    .nav-links a {
+      color: #828890;
+      text-decoration: none;
+      margin: 10px 0;
+      display: block;
+      transition: color 0.2s;
+    }
 
-        .nav-links a:hover {
-            color: white;
-        }
+    .nav-links a:hover { color: white; }
+    .nav-links.open { display: flex; }
 
-        .action-button {
-            background-image: linear-gradient(to right, #b53300, #8d2d01);
-            color: white;
-            font-weight: 700;
-            padding: 0.75rem 1.5rem; 
-            font-size: 1rem;
-            border-radius: 20px;
-            border: none;
-            cursor: pointer;
-            transition: opacity 0.2s ease-in-out;
-            display: flex;
-            align-items: center;
-        }
+    /* Hamburger button */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 101;
+    }
 
-        .action-button:hover {
-            opacity: 0.8;
-        }
+    .hamburger div {
+      width: 100%;
+      height: 3px;
+      background-color: white;
+      border-radius: 5px;
+    }
 
-        .action-button span {
-            margin-left: 8px;
-        }
+    /* Action button */
+    .action-button {
+      background-image: linear-gradient(to right, #b53300, #8d2d01);
+      color: white;
+      font-weight: 700;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: opacity 0.2s ease-in-out;
+    }
 
-        main {
-            padding-top: 50px;
-            padding-bottom: 50px;
-            text-align: center;
-        }
-        
-        .main-content {
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    .action-button:hover { opacity: 0.8; }
+    .action-button span { margin-left: 8px; }
 
-        /* Hamburger Button */
-        .hamburger {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 25px;
-            height: 20px;
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
+    /* Main content */
+    main {
+      padding: 50px 0;
+      text-align: center;
+    }
 
-        .hamburger div {
-            width: 100%;
-            height: 3px;
-            background-color: white;
-            border-radius: 5px;
-        }
+    .main-content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
 
-        @media (min-width: 768px) {
-            .nav-links {
-                display: flex !important;
-                position: static;
-                flex-direction: row;
-                background: none;
-                width: auto;
-                padding: 0;
-                border-radius: 0;
-            }
-            .nav-links a {
-                margin-left: 2rem;
-            }
-            .hamburger {
-                display: none;
-            }
-            .main-content h2 {
-                font-size: 3rem;
-            }
-        }
-    </style>
+    /* Responsive */
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex !important;
+        position: static;
+        flex-direction: row;
+        width: auto;
+        padding: 0;
+        border-radius: 0;
+      }
+      .nav-links a { margin-left: 2rem; }
+      .hamburger { display: none; }
+    }
+  </style>
 </head>
 <body>
   <div class="bg-wrapper">
@@ -201,7 +185,10 @@
 
         <div>
           <button class="action-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
             <span>Post Item</span>
           </button>
         </div>
@@ -213,110 +200,6 @@
     </main>
   </div>
 
-  <style>
-    body {
-      font-family: 'Montserrat', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    .bg-wrapper {
-      background-image: url("https://i.imghippo.com/files/PO2471Go.jpg");
-      background-color: #000;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      min-height: 100vh;
-    }
-
-    nav {
-      border-radius: 50px;
-      background-color: black;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 25px;
-      width: 80%;
-      position: relative;
-    }
-
-    .logo-container { display: flex; align-items: center; }
-    .logo-image { width: 48px; height: 48px; margin-right: 12px; }
-    .logo-text h1 { font-weight: 700; font-size: 1.25rem; color: white; margin: 0; }
-    .logo-text p { font-size: 0.875rem; color: #9ca3af; margin: 0; }
-
-    .nav-links {
-      display: none;
-      flex-direction: column;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 100%;
-      background-color: black;
-      text-align: center;
-      padding: 10px 0;
-      border-radius: 0 0 15px 15px;
-      z-index: 100;
-    }
-
-    .nav-links a {
-      color: #828890;
-      text-decoration: none;
-      margin: 10px 0;
-      display: block;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: white; }
-
-    .nav-links.open { display: flex; }
-
-    .action-button {
-      background-image: linear-gradient(to right, #b53300, #8d2d01);
-      color: white;
-      font-weight: 700;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      border-radius: 20px;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-    }
-
-    .action-button span { margin-left: 8px; }
-
-    .hamburger {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 25px;
-      height: 20px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      z-index: 101;
-    }
-    .hamburger div {
-      width: 100%;
-      height: 3px;
-      background-color: white;
-      border-radius: 5px;
-    }
-
-    @media (min-width: 768px) {
-      .nav-links {
-        display: flex !important;
-        position: static;
-        flex-direction: row;
-        width: auto;
-        padding: 0;
-        border-radius: 0;
-      }
-      .nav-links a { margin-left: 2rem; }
-      .hamburger { display: none; }
-    }
-  </style>
-
   <script>
     const hamburger = document.getElementById("hamburger");
     const navLinks = document.getElementById("nav-links");
@@ -325,6 +208,5 @@
       navLinks.classList.toggle("open");
     });
   </script>
-
 </body>
 </html>
