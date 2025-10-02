@@ -16,7 +16,7 @@
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            background-attachment: scroll;
             margin: 0;
             padding: 0;
         }
@@ -73,14 +73,23 @@
             font-weight: 700;
             font-size: 1.25rem;
             display: none; 
-            align-items: center;
+            flex-direction: column;
+            background-color: black;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 100%;
+            border-radius: 0 0 15px 15px;
+            text-align: center;
+            padding: 10px 0;
         }
 
         .nav-links a {
             color: #828890;
             text-decoration: none;
             transition: color 0.2s ease-in-out;
-            margin-left: 2rem;
+            margin: 10px 0;
+            display: block;
         }
 
         .nav-links a:hover {
@@ -142,7 +151,16 @@
 
         @media (min-width: 768px) {
             .nav-links {
-                display: flex;
+                display: flex !important;
+                position: static;
+                flex-direction: row;
+                background: none;
+                width: auto;
+                padding: 0;
+                border-radius: 0;
+            }
+            .nav-links a {
+                margin-left: 2rem;
             }
             .hamburger {
                 display: none;
@@ -202,7 +220,11 @@
         const navLinks = document.getElementById("nav-links");
 
         hamburger.addEventListener("click", () => {
-            navLinks.style.display = navLinks.style.display === "flex" ? "none" : "flex";
+            if(navLinks.style.display === "flex") {
+                navLinks.style.display = "none";
+            } else {
+                navLinks.style.display = "flex";
+            }
         });
     </script>
 
