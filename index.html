@@ -9,204 +9,136 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* Reset & font */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Montserrat', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* Background */
-    .bg-wrapper {
-      background-image: url("https://i.imghippo.com/files/PO2471Go.jpg");
-      background-color: #000;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
+      background: url("https://i.imghippo.com/files/PO2471Go.jpg") center/cover no-repeat;
       min-height: 100vh;
     }
 
-    /* Container */
-    .container {
-      max-width: 1500px;
-      margin: 0 auto;
-      padding: 0 25px;
-    }
-
-    /* Header & Nav */
     nav {
-      border-radius: 50px;
-      background-color: black;
+      width: 30%;
+      max-width: 1200px;
+      margin: 10px auto;
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
-      padding: 15px 25px;
-      width: 80%;
-      margin: 0 auto;
-      position: relative;
+      padding: 8px 15px;
+      background-color: black;
+      border-radius: 30px;
+      flex-wrap: wrap;
     }
 
-    .logo-container {
+    /* Left: Logo */
+    .logo {
       display: flex;
       align-items: center;
+      gap: 8px;
     }
-
-    .logo-image {
-      width: 48px;
-      height: 48px;
-      margin-right: 12px;
-    }
-
-    .logo-text h1 {
-      font-weight: 700;
-      font-size: 1.25rem;
+    .logo img { width: 40px; height: 40px; }
+    .logo h1 {
       color: white;
-      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 700;
     }
 
-    .logo-text p {
-      font-size: 0.875rem;
-      color: #9ca3af;
-      margin: 0;
+    /* Middle & Right buttons */
+    .nav-middle, .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
+    .nav-middle button, .nav-right button {
+      padding: 0.45rem 1rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      font-size: 0.9rem;
+    }
+    .nav-middle button {
+      background-color: #4a90e2;
+      color: white;
+    }
+    .nav-middle button:hover { background-color: #357abd; }
+    .nav-right button {
+      background: linear-gradient(90deg, #b53300, #8d2d01);
+      color: white;
+    }
+    .nav-right button:hover { opacity: 0.85; }
 
-    /* Nav links */
-    .nav-links {
+    /* Hamburger */
+    .hamburger {
       display: none;
       flex-direction: column;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 100%;
-      background-color: black;
-      text-align: center;
-      padding: 10px 0;
-      border-radius: 0 0 15px 15px;
-      z-index: 100;
-    }
-
-    .nav-links a {
-      color: #828890;
-      text-decoration: none;
-      margin: 10px 0;
-      display: block;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: white; }
-    .nav-links.open { display: flex; }
-
-    /* Hamburger button */
-    .hamburger {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 30px;
-      height: 20px;
-      background: none;
-      border: none;
+      gap: 4px;
       cursor: pointer;
-      z-index: 101;
     }
-
     .hamburger div {
-      width: 100%;
-      height: 3px;
+      width: 22px;
+      height: 2.5px;
       background-color: white;
-      border-radius: 5px;
+      border-radius: 3px;
     }
 
-    /* Action button */
-    .action-button {
-      background-image: linear-gradient(to right, #b53300, #8d2d01);
-      color: white;
-      font-weight: 700;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      border-radius: 20px;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      transition: opacity 0.2s ease-in-out;
-    }
-
-    .action-button:hover { opacity: 0.8; }
-    .action-button span { margin-left: 8px; }
-
-    /* Main content */
-    main {
-      padding: 50px 0;
-      text-align: center;
-    }
-
-    .main-content {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    /* Responsive */
-    @media (min-width: 768px) {
-      .nav-links {
-        display: flex !important;
-        position: static;
-        flex-direction: row;
-        width: auto;
-        padding: 0;
-        border-radius: 0;
+    /* Mobile view */
+    @media (max-width: 768px) {
+      nav { flex-direction: column; align-items: flex-start; padding: 10px; }
+      .nav-middle, .nav-right {
+        flex-direction: column;
+        width: 100%;
+        display: none;
       }
-      .nav-links a { margin-left: 2rem; }
-      .hamburger { display: none; }
+      .nav-middle button, .nav-right button {
+        width: 100%;
+        text-align: center;
+        margin: 4px 0;
+        font-size: 0.95rem;
+        padding: 0.5rem 0;
+      }
+      .nav-middle.open, .nav-right.open { display: flex; }
+      .hamburger { display: flex; }
     }
   </style>
 </head>
 <body>
-  <div class="bg-wrapper">
-    <header>
-      <nav class="container">
-        <div class="logo-container">
-          <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/NIT_Rourkela_Colour_Logo.svg" class="logo-image">
-          <div class="logo-text">
-            <h1>NIT Rourkela</h1>
-            <p>Lost & Found</p>
-          </div>
-        </div>
 
-        <div class="nav-links" id="nav-links">
-          <a href="#">Lost Items</a>
-          <a href="#">Found Items</a>
-        </div>
+  <nav>
+    <!-- Left: Logo -->
+    <div class="logo">
+      <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/NIT_Rourkela_Colour_Logo.svg" alt="Logo">
+      <h1>NIT Rourkela</h1>
+    </div>
 
-        <button class="hamburger" id="hamburger">
-          <div></div>
-          <div></div>
-          <div></div>
-        </button>
+    <!-- Middle button -->
+    <div class="nav-middle" id="nav-middle">
+      <button>Explore</button>
+    </div>
 
-        <div>
-          <button class="action-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-            <span>Post Item</span>
-          </button>
-        </div>
-      </nav>
-    </header>
+    <!-- Right button -->
+    <div class="nav-right" id="nav-right">
+      <button>Post Item</button>
+    </div>
 
-    <main class="container">
-      <div class="main-content"></div>
-    </main>
-  </div>
+    <!-- Hamburger -->
+    <div class="hamburger" id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </nav>
 
   <script>
-    const hamburger = document.getElementById("hamburger");
-    const navLinks = document.getElementById("nav-links");
+    const hamburger = document.getElementById('hamburger');
+    const navMiddle = document.getElementById('nav-middle');
+    const navRight = document.getElementById('nav-right');
 
-    hamburger.addEventListener("click", () => {
-      navLinks.classList.toggle("open");
+    hamburger.addEventListener('click', () => {
+      navMiddle.classList.toggle('open');
+      navRight.classList.toggle('open');
     });
   </script>
+
 </body>
 </html>
