@@ -6,22 +6,18 @@
     <title>NIT Rourkela - Lost & Found</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Corrected the Google Fonts link -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            
-            /* --- FIX FOR BACKGROUND IMAGE --- */
             background-image: url("https://i.imghippo.com/files/PO2471Go.jpg");
-            background-color: #000; /* Fallback color */
-            background-repeat: no-repeat; /* Prevents the image from repeating */
-            background-size: cover;       /* Ensures the image covers the whole page */
-            background-position: center;  /* Centers the image */
-            background-attachment: fixed; /* Keeps the background still on scroll */
-            
-            margin: 0; /* Also good practice to reset margin/padding */
+            background-color: #000;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
             padding: 0;
         }
 
@@ -39,21 +35,19 @@
         }
 
         nav {
-        border-radius: 50px;
-        background-color: black;
-        display: flex;
-        justify-content: space-between;
-        padding: 15px 25px;
-        width: 80%;
-    margin: auto;  /* Centers nav */
-}
-
+            border-radius: 50px;
+            background-color: black;
+            display: flex;
+            justify-content: space-between;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            width: 80%;
+        }
 
         .logo-container {
             display: flex;
             align-items: center;
         }
-
 
         .logo-image {
             width: 48px;
@@ -114,13 +108,19 @@
             margin-left: 8px;
         }
 
-    
         main {
             padding-top: 50px;
             padding-bottom: 50px;
             text-align: center;
         }
+        
+        .main-content {
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
+        /* Hamburger Button */
         .hamburger {
             display: block;
             cursor: pointer;
@@ -130,28 +130,18 @@
             font-size: 28px;
         }
 
-        .main-content {
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-      
-
         @media (min-width: 768px) {
             .nav-links {
                 display: flex;
             }
+            .hamburger {
+                display: none;
+            }
             .main-content h2 {
                 font-size: 3rem;
             }
-            .hamburger {
-                display: none;
         }
-        }
-
     </style>
-
-    
 </head>
 <body>
 
@@ -161,7 +151,6 @@
             
             <!-- Left Side: Logo and Title -->
             <div class="logo-container">
-                <!-- Replaced the SVG with the image you provided -->
                 <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/NIT_Rourkela_Colour_Logo.svg" class="logo-image">
                 <div class="logo-text">
                     <h1>NIT Rourkela</h1>
@@ -169,10 +158,14 @@
                 </div>
             </div>
 
-            <div class="nav-links">
+            <!-- Nav Links -->
+            <div class="nav-links" id="nav-links">
                 <a href="#">Lost Items</a>
                 <a href="#">Found Items</a>
             </div>
+
+            <!-- Hamburger Button -->
+            <button class="hamburger" id="hamburger">☰</button>
 
             <div>
                 <button class="action-button">
@@ -190,15 +183,14 @@
         </div>
     </main>
 
-     <script>
-    const hamburger = document.getElementById("hamburger");
-    const navLinks = document.getElementById("nav-links");
+    <script>
+        const hamburger = document.getElementById("hamburger");
+        const navLinks = document.getElementById("nav-links");
 
-    hamburger.addEventListener("click", () => {
-      navLinks.style.display = navLinks.style.display === "flex" ? "none" : "flex";
-    });
-  </script>
+        hamburger.addEventListener("click", () => {
+            navLinks.style.display = navLinks.style.display === "flex" ? "none" : "flex";
+        });
+    </script>
 
 </body>
 </html>
-
