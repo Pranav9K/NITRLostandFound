@@ -1,3 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lost & Found Items - NIT Rourkela</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="responsesstyle.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/NIT_Rourkela_Colour_Logo.svg" alt="NIT Rourkela Logo" class="logo-img">
+      <span class="logo-text">NIT Rourkela</span>
+    </div>
+    <a href="index.html" class="nav-button">Home</a>
+  </nav>
+
+  <main class="main-content">
+    <div class="page-header">
+      <h1 class="page-title">Lost & Found Items</h1>
+      <p class="page-subtitle">Browse through all reported lost and found items from our community</p>
+    </div>
+
+    <div class="content-card search-section">
+      <div class="search-form">
+        <input type="text" class="search-input" placeholder="Search for items..." id="searchInput">
+        <button class="search-btn" onclick="searchItems()">Search</button>
+      </div>
+      
+      <div class="filter-section">
+        <select class="filter-select" id="typeFilter" onchange="filterItems()">
+          <option value="all">All Items</option>
+          <option value="lost">Lost Items</option>
+          <option value="found">Found Items</option>
+        </select>
+        
+        <select class="filter-select" id="sortFilter" onchange="sortItems()">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="name">Name A-Z</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <div class="items-grid" id="itemsGrid">
+        <div class="loading">
+          <div class="loading-spinner"></div>
+          <p>Loading items...</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
 <script>
   const SHEET_URL = "https://opensheet.elk.sh/16MHESnMAm-A5EGbX2rflhj6ndF8nGm3HAF3G8sHTZnU/Form%20Responses%201";
 
@@ -85,3 +140,7 @@
 
   loadItems();
 </script>
+
+
+</body>
+</html>
