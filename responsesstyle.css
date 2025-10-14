@@ -1,4 +1,6 @@
-/* Reset */
+/* ==============================
+   RESET
+============================== */
 * {
   margin: 0;
   padding: 0;
@@ -11,6 +13,7 @@ body {
   background-size: cover;
   min-height: 100vh;
   line-height: 1.6;
+  color: #fff;
 }
 
 /* Overlay for readability */
@@ -18,25 +21,24 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.35);
   z-index: -1;
 }
 
-/* Navbar */
+/* ==============================
+   NAVBAR
+============================== */
 nav {
   background: rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(10px);
-  color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
-  width: 100%;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   position: sticky;
   top: 0;
   z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
 }
 
@@ -48,7 +50,7 @@ nav:hover {
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   transition: transform 0.3s ease;
 }
 .logo:hover { transform: scale(1.05); }
@@ -57,41 +59,30 @@ nav:hover {
   height: 45px;
   width: auto;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-  transition: filter 0.3s ease;
 }
-.logo:hover .logo-img {
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
-}
-
 .logo-text {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #fff;
-  white-space: nowrap;
-  letter-spacing: -0.02em;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 .nav-button {
   background: #ff6b35;
   color: #fff;
-  border: none;
-  padding: 0.8rem 1.5rem;
+  padding: 0.7rem 1.4rem;
   border-radius: 8px;
-  font-size: 1rem;
   font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
   text-decoration: none;
-  display: inline-block;
+  transition: 0.3s ease;
 }
 .nav-button:hover {
   background: #e55a2b;
-  transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(255,107,53,0.4);
+  transform: translateY(-2px);
 }
 
-/* Main layout */
+/* ==============================
+   MAIN CONTENT
+============================== */
 .main-content {
   padding: 3rem 2rem;
   max-width: 1200px;
@@ -100,26 +91,25 @@ nav:hover {
 
 .page-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
 }
 .page-title {
-  color: #fff;
-  font-size: 3rem;
+  font-size: 2.8rem;
   font-weight: 700;
   margin-bottom: 1rem;
   text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 .page-subtitle {
   color: rgba(255,255,255,0.8);
-  font-size: 1.2rem;
-  max-width: 600px;
-  margin: 0 auto;
+  font-size: 1.1rem;
 }
 
-/* Reusable card */
+/* ==============================
+   SEARCH + FILTER SECTION
+============================== */
 .content-card {
   background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   padding: 2rem;
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.2);
@@ -127,43 +117,40 @@ nav:hover {
   margin-bottom: 2rem;
 }
 
-/* Search and filters */
-.search-section { margin-bottom: 3rem; }
-
 .search-form {
   display: flex;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   flex-wrap: wrap;
 }
+
 .search-input {
   flex: 1;
-  min-width: 250px;
+  min-width: 260px;
   padding: 1rem;
   border: 1px solid rgba(255,255,255,0.3);
   border-radius: 12px;
   background: rgba(255,255,255,0.1);
   color: #fff;
   font-size: 1rem;
-  backdrop-filter: blur(10px);
+  transition: 0.3s ease;
 }
 .search-input::placeholder { color: rgba(255,255,255,0.6); }
 .search-input:focus {
-  outline: none;
   border-color: #ff6b35;
   box-shadow: 0 0 0 3px rgba(255,107,53,0.2);
+  outline: none;
 }
 
 .search-btn {
   padding: 1rem 2rem;
   background: #ff6b35;
-  color: #fff;
   border: none;
   border-radius: 12px;
-  font-size: 1rem;
   font-weight: 600;
+  color: #fff;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: 0.3s ease;
 }
 .search-btn:hover {
   background: #e55a2b;
@@ -173,80 +160,58 @@ nav:hover {
 
 .filter-section {
   display: flex;
-  gap: 1rem;
   flex-wrap: wrap;
-  margin-bottom: 2rem;
+  gap: 1rem;
 }
 .filter-select {
   padding: 0.8rem 1rem;
   border: 1px solid rgba(255,255,255,0.3);
-  border-radius: 8px;
+  border-radius: 10px;
   background: rgba(255,255,255,0.1);
   color: #fff;
-  font-size: 0.9rem;
-  backdrop-filter: blur(10px);
+  font-size: 0.95rem;
+  transition: 0.3s ease;
 }
-.filter-select option {
-  background: #333;
-  color: #fff;
+.filter-select:focus {
+  border-color: #ff6b35;
+  outline: none;
 }
 
-/* Items grid */
+/* ==============================
+   ITEMS GRID
+============================== */
 .items-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
 }
 
 .item-card {
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  padding: 1.5rem;
-  border-radius: 16px;
+  background: rgba(255,255,255,0.12);
   border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px;
+  padding: 1.5rem;
   transition: all 0.3s ease;
+  backdrop-filter: blur(14px);
 }
 .item-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-  border-color: rgba(255,107,53,0.3);
+  transform: translateY(-5px);
+  border-color: rgba(255,107,53,0.4);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
 }
 
-.item-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 1rem;
-  background: rgba(255,255,255,0.1);
-}
-.item-title {
-  color: #fff;
-  font-size: 1.2rem;
+.item-card h3 {
+  color: #ffb892;
+  font-size: 1.3rem;
+  margin-bottom: 0.6rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-.item-description {
-  color: rgba(255,255,255,0.8);
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-  line-height: 1.5;
 }
 
-.item-details {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-.item-location {
-  color: #ff6b35;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-.item-date {
-  color: rgba(255,255,255,0.6);
-  font-size: 0.8rem;
+.item-card p {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.85);
+  margin: 4px 0;
+  line-height: 1.5;
 }
 
 .item-type {
@@ -254,8 +219,9 @@ nav:hover {
   padding: 0.3rem 0.8rem;
   border-radius: 20px;
   font-size: 0.8rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin-bottom: 0.5rem;
 }
 .item-type.lost {
   background: rgba(255,107,53,0.2);
@@ -268,36 +234,16 @@ nav:hover {
   border: 1px solid #4CAF50;
 }
 
-.contact-btn {
-  width: 100%;
-  padding: 0.8rem;
-  background: rgba(255,107,53,0.2);
-  color: #ff6b35;
-  border: 1px solid #ff6b35;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.contact-btn:hover {
-  background: #ff6b35;
-  color: #fff;
-  transform: translateY(-1px);
-}
-
-/* States */
-.no-items {
-  text-align: center;
-  padding: 3rem;
+.timestamp {
   color: rgba(255,255,255,0.6);
-}
-.no-items-icon {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-  opacity: 0.5;
+  font-size: 0.8rem;
+  margin-top: 0.8rem;
+  text-align: right;
 }
 
+/* ==============================
+   EMPTY / LOADING STATES
+============================== */
 .loading {
   text-align: center;
   padding: 3rem;
@@ -315,17 +261,20 @@ nav:hover {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* Responsive */
+.no-items {
+  text-align: center;
+  padding: 3rem;
+  color: rgba(255,255,255,0.6);
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
 @media (max-width: 768px) {
-  nav { padding: 0.8rem 1rem; }
-  .logo-img { height: 35px; }
-  .logo-text { font-size: 0.9rem; }
-  .nav-button { padding: 0.6rem 1rem; font-size: 0.9rem; }
   .main-content { padding: 2rem 1rem; }
   .page-title { font-size: 2rem; }
   .search-form { flex-direction: column; }
-  .search-input { min-width: auto; }
-  .items-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .items-grid { grid-template-columns: 1fr; gap: 1.5rem; }
   .filter-section { justify-content: center; }
   body { background-attachment: scroll; }
 }
