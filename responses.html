@@ -1,134 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lost & Found Items - NIT Rourkela</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="responsesstyle.css">
-</head>
-<body>
-  <nav>
-    <div class="logo">
-      <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/NIT_Rourkela_Colour_Logo.svg" alt="NIT Rourkela Logo" class="logo-img">
-      <span class="logo-text">NIT Rourkela</span>
-    </div>
-    <a href="index.html" class="nav-button">Home</a>
-  </nav>
+<script>
+  const SHEET_URL = "https://opensheet.elk.sh/16MHESnMAm-A5EGbX2rflhj6ndF8nGm3HAF3G8sHTZnU/Form%20Responses%201";
 
-  <main class="main-content">
-    <div class="page-header">
-      <h1 class="page-title">Lost & Found Items</h1>
-      <p class="page-subtitle">Browse through all reported lost and found items from our community</p>
-    </div>
+  let allItems = [];
 
-    <div class="content-card search-section">
-      <div class="search-form">
-        <input type="text" class="search-input" placeholder="Search for items..." id="searchInput">
-        <button class="search-btn" onclick="searchItems()">Search</button>
-      </div>
-      
-      <div class="filter-section">
-        <select class="filter-select" id="typeFilter" onchange="filterItems()">
-          <option value="all">All Items</option>
-          <option value="lost">Lost Items</option>
-          <option value="found">Found Items</option>
-        </select>
-        
-        <select class="filter-select" id="sortFilter" onchange="sortItems()">
-          <option value="newest">Newest First</option>
-          <option value="oldest">Oldest First</option>
-          <option value="name">Name A-Z</option>
-        </select>
-      </div>
-    </div>
+  async function loadItems() {
+    try {
+      const res = await fetch(SHEET_URL);
+      const data = await res.json();
 
-    <div class="content-card">
-      <div class="items-grid" id="itemsGrid">
-        <div class="loading">
-          <div class="loading-spinner"></div>
-          <p>Loading items .</p>
-        </div>
-      </div>
-    </div>
-  </main>
+      allItems = data.map(entry => ({
+        timestamp: entry["Timestamp"] || "",
+        type: (entry["Are you reporting a lost item or a found item?"] || "").toLowerCase(),
+        itemName: entry["Item Name"] || "Unnamed Item",
+        description: entry["Item Description"] || "No description available.",
+        room: entry["Room No."] || "Not specified",
+        contact: entry["Contact Information (Phone No and Name):"] || "Not provided",
+        photo: entry["Item Photo"] || "" // Google Drive or uploaded photo link
+      }));
 
-  <script>
-    // Replace with your actual sheet URL
-    const SHEET_URL = "https://opensheet.elk.sh/16MHESnMAm-A5EGbX2rflhj6ndF8nGm3HAF3G8sHTZnU/Form%20Responses%201";
+      renderItems(allItems);
+    } catch (err) {
+      document.getElementById("itemsGrid").innerHTML = "<p style='text-align:center'>⚠️ Unable to load responses.</p>";
+      console.error(err);
+    }
+  }
 
-    let allItems = [];
+  function renderItems(items) {
+    const grid = document.getElementById("itemsGrid");
+    grid.innerHTML = "";
 
-    async function loadItems() {
-      try {
-        const res = await fetch(SHEET_URL);
-        const data = await res.json();
-        allItems = data.map(entry => ({
-          timestamp: entry["Timestamp"] || "",
-          itemName: entry["Item Name"] || "Unnamed Item",
-          type: (entry["Type"] || "").toLowerCase(), // lost or found
-          location: entry["Location Found"] || "Unknown",
-          description: entry["Description"] || "",
-          contact: entry["Contact Info"] || "Not provided"
-        }));
-        renderItems(allItems);
-      } catch (err) {
-        document.getElementById("itemsGrid").innerHTML = "<p style='text-align:center'>⚠️ Unable to load responses.</p>";
-        console.error(err);
-      }
+    if (items.length === 0) {
+      grid.innerHTML = "<p style='text-align:center'>No items found.</p>";
+      return;
     }
 
-    function renderItems(items) {
-      const grid = document.getElementById("itemsGrid");
-      grid.innerHTML = "";
-      if (items.length === 0) {
-        grid.innerHTML = "<p style='text-align:center'>No items found.</p>";
-        return;
-      }
-      items.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "item-card";
-        card.innerHTML = `
-          <h3>${item.itemName}</h3>
-          <p><b>Type:</b> ${item.type.charAt(0).toUpperCase() + item.type.slice(1)}</p>
-          <p><b>Location:</b> ${item.location}</p>
-          <p><b>Description:</b> ${item.description}</p>
-          <p><b>Contact:</b> ${item.contact}</p>
-          <p class="timestamp">${item.timestamp}</p>
-        `;
-        grid.appendChild(card);
-      });
-    }
+    items.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "item-card";
 
-    // ---- Filters ----
-    function searchItems() {
-      const query = document.getElementById("searchInput").value.toLowerCase();
-      const filtered = allItems.filter(i =>
-        i.itemName.toLowerCase().includes(query) ||
-        i.location.toLowerCase().includes(query) ||
-        i.description.toLowerCase().includes(query)
-      );
-      renderItems(filtered);
-    }
+      // if photo exists, embed it in the card
+      const imageSection = item.photo
+        ? `<img src="${item.photo}" alt="${item.itemName}" class="item-photo" onerror="this.style.display='none';">`
+        : "";
 
-    function filterItems() {
-      const type = document.getElementById("typeFilter").value;
-      let filtered = allItems;
-      if (type !== "all") filtered = allItems.filter(i => i.type === type);
-      renderItems(filtered);
-    }
+      card.innerHTML = `
+        ${imageSection}
+        <span class="item-type ${item.type}">${item.type}</span>
+        <h3>${item.itemName}</h3>
+        <p><b>Description:</b> ${item.description}</p>
+        <p><b>Room No:</b> ${item.room}</p>
+        <p><b>Contact:</b> ${item.contact}</p>
+        <p class="timestamp">${item.timestamp}</p>
+      `;
+      grid.appendChild(card);
+    });
+  }
 
-    function sortItems() {
-      const sort = document.getElementById("sortFilter").value;
-      let sorted = [...allItems];
-      if (sort === "newest") sorted.reverse();
-      if (sort === "oldest") sorted = allItems;
-      if (sort === "name") sorted.sort((a, b) => a.itemName.localeCompare(b.itemName));
-      renderItems(sorted);
-    }
+  // ---- Filters ----
+  function searchItems() {
+    const query = document.getElementById("searchInput").value.toLowerCase();
+    const filtered = allItems.filter(i =>
+      i.itemName.toLowerCase().includes(query) ||
+      i.description.toLowerCase().includes(query) ||
+      i.room.toLowerCase().includes(query)
+    );
+    renderItems(filtered);
+  }
 
-    loadItems();
-  </script>
+  function filterItems() {
+    const type = document.getElementById("typeFilter").value;
+    let filtered = allItems;
+    if (type !== "all") filtered = allItems.filter(i => i.type === type);
+    renderItems(filtered);
+  }
 
-</body>
-</html>
+  function sortItems() {
+    const sort = document.getElementById("sortFilter").value;
+    let sorted = [...allItems];
+    if (sort === "newest") sorted.reverse();
+    if (sort === "oldest") sorted = allItems;
+    if (sort === "name") sorted.sort((a, b) => a.itemName.localeCompare(b.itemName));
+    renderItems(sorted);
+  }
+
+  loadItems();
+</script>
