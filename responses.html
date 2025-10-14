@@ -121,12 +121,17 @@ document.addEventListener('DOMContentLoaded', function() {
   let allItems = [];
 
   // Convert Google Drive links to direct viewable image
-  function convertDriveLink(url) {
-    if (!url) return "";
-    const match = url.match(/(?:\/file\/d\/|id=)([-\w]{25,})/);
-    if (match && match[1]) return `https://drive.google.com/uc?export=view&id=${match[1]}`;
-    return url;
+function convertDriveLink(url) {
+  if (!url) return "";
+  const match = url.match(/[-\w]{25,}/);
+  if (match && match[0]) {
+    const fileId = match[0];
+    return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
   }
+  return "";
+}
+
+
 
   async function loadItems() {
     try {
