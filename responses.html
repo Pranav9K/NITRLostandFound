@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +6,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="responsesstyle.css">
 </head>
-<body>
   <nav>
     <div class="logo">
       <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/NIT_Rourkela_Colour_Logo.svg" alt="NIT Rourkela Logo" class="logo-img">
@@ -54,93 +52,165 @@
   </main>
 
 <script>
-  const SHEET_URL = "https://opensheet.elk.sh/16MHESnMAm-A5EGbX2rflhj6ndF8nGm3HAF3G8sHTZnU/Form%20Responses%201";
+  document.addEventListener('DOMContentLoaded', function() {
+    // ==============================
+    //    VARIABLES & CONSTANTS
+    // ==============================
+    const SHEET_URL = "https://opensheet.elk.sh/16MHESnMAm-A5EGbX2rflhj6ndF8nGm3HAF3G8sHTZnU/Form%20Responses%201";
+    const itemsGrid = document.getElementById('itemsGrid');
+    let allItems = [];
 
-  let allItems = [];
+    // ==============================
+    //    MODAL CREATION & SETUP
+    // ==============================
+    // Create the modal elements dynamically and add them to the page
+    const modal = document.createElement("div");
+    modal.classList.add("image-modal");
+    modal.id = "imageModal"; // Give it an ID for consistency
+    modal.innerHTML = `
+      <span class="image-modal-close" id="modalCloseBtn">&times;</span>
+      <img src="" alt="Enlarged Item Image" id="modalImage">
+    `;
+    document.body.appendChild(modal);
 
-  async function loadItems() {
-    try {
-      const res = await fetch(SHEET_URL);
-      const data = await res.json();
+    // Get references to the created modal elements
+    const modalImage = modal.querySelector("#modalImage");
+    const modalCloseBtn = modal.querySelector("#modalCloseBtn");
 
-      allItems = data.map(entry => ({
-        timestamp: entry["Timestamp"] || "",
-        type: (entry["Are you reporting a lost item or a found item?"] || "").toLowerCase(),
-        itemName: entry["Item Name"] || "Unnamed Item",
-        description: entry["Item Description"] || "No description available.",
-        room: entry["Room No."] || "Not specified",
-        contact: entry["Contact Information (Phone No and Name):"] || "Not provided",
-        photo: entry["Item Photo"] || "" // Google Drive or uploaded photo link
-      }));
+    // ==============================
+    //    DATA FETCHING & RENDERING
+    // ==============================
+    async function loadItems() {
+      try {
+        const res = await fetch(SHEET_URL);
+        const data = await res.json();
 
-      renderItems(allItems);
-    } catch (err) {
-      document.getElementById("itemsGrid").innerHTML = "<p style='text-align:center'>⚠️ Unable to load responses.</p>";
-      console.error(err);
+        allItems = data.map(entry => ({
+          timestamp: entry["Timestamp"] || "",
+          type: (entry["Are you reporting a lost item or a found item?"] || "").toLowerCase(),
+          itemName: entry["Item Name"] || "Unnamed Item",
+          description: entry["Item Description"] || "No description available.",
+          room: entry["Room No:"] || "Not specified",
+          contact: entry["Contact Information (Phone No and Name):"] || "Not provided",
+          photo: entry["Item Photo"] || ""
+        }));
+        
+        // Initial sort by newest first
+        renderItems(allItems.slice().reverse());
+
+      } catch (err) {
+        itemsGrid.innerHTML = "<p class='no-items'>⚠️ Unable to load items. Please try again later.</p>";
+        console.error(err);
+      }
     }
-  }
 
-  function renderItems(items) {
-    const grid = document.getElementById("itemsGrid");
-    grid.innerHTML = "";
+    function renderItems(items) {
+      itemsGrid.innerHTML = ""; // Clear previous items
 
-    if (items.length === 0) {
-      grid.innerHTML = "<p style='text-align:center'>No items found.</p>";
-      return;
+      if (items.length === 0) {
+        itemsGrid.innerHTML = "<p class='no-items'>No items found matching your criteria.</p>";
+        return;
+      }
+
+      items.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "item-card";
+
+        const imageSection = item.photo ?
+          `<img src="${item.photo}" alt="${item.itemName}" class="item-photo" loading="lazy" onerror="this.style.display='none';">` :
+          "";
+
+        card.innerHTML = `
+          ${imageSection}
+          <span class="item-type ${item.type}">${item.type}</span>
+          <h3>${item.itemName}</h3>
+          <p><b>Description:</b> ${item.description}</p>
+          <p><b>Room No:</b> ${item.room}</p>
+          <p><b>Contact:</b> ${item.contact}</p>
+          <p class="timestamp">${new Date(item.timestamp).toLocaleString()}</p>
+        `;
+        itemsGrid.appendChild(card);
+      });
     }
 
-    items.forEach(item => {
-      const card = document.createElement("div");
-      card.className = "item-card";
+    // ==============================
+    //    FILTERS & SORTING
+    // ==============================
+    function applyFiltersAndSort() {
+        const searchQuery = document.getElementById("searchInput").value.toLowerCase();
+        const typeFilter = document.getElementById("typeFilter").value;
+        const sortOrder = document.getElementById("sortFilter").value;
 
-      // if photo exists, embed it in the card
-      const imageSection = item.photo
-        ? `<img src="${item.photo}" alt="${item.itemName}" class="item-photo" onerror="this.style.display='none';">`
-        : "";
+        // 1. Filter by type and search query
+        let filteredItems = allItems.filter(item => {
+            const matchesType = (typeFilter === 'all') || (item.type === typeFilter);
+            const matchesSearch = item.itemName.toLowerCase().includes(searchQuery) ||
+                                  item.description.toLowerCase().includes(searchQuery) ||
+                                  item.room.toLowerCase().includes(searchQuery);
+            return matchesType && matchesSearch;
+        });
 
-      card.innerHTML = `
-        ${imageSection}
-        <span class="item-type ${item.type}">${item.type}</span>
-        <h3>${item.itemName}</h3>
-        <p><b>Description:</b> ${item.description}</p>
-        <p><b>Room No:</b> ${item.room}</p>
-        <p><b>Contact:</b> ${item.contact}</p>
-        <p class="timestamp">${item.timestamp}</p>
-      `;
-      grid.appendChild(card);
+        // 2. Sort the filtered results
+        let sortedItems = [...filteredItems];
+        switch (sortOrder) {
+            case 'newest':
+                sortedItems.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                break;
+            case 'oldest':
+                sortedItems.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+                break;
+            case 'name':
+                sortedItems.sort((a, b) => a.itemName.localeCompare(b.itemName));
+                break;
+        }
+
+        renderItems(sortedItems);
+    }
+    
+    // Make filter functions globally accessible for the onchange/onclick attributes in HTML
+    window.searchItems = applyFiltersAndSort;
+    window.filterItems = applyFiltersAndSort;
+    window.sortItems = applyFiltersAndSort;
+
+
+    // ==============================
+    //    EVENT LISTENERS
+    // ==============================
+    // Use event delegation to handle clicks on item cards (more efficient)
+    itemsGrid.addEventListener('click', function(event) {
+      const photo = event.target.closest('.item-photo');
+      if (photo) {
+        modalImage.src = photo.src;
+        modal.classList.add('active');
+      }
     });
-  }
 
-  // ---- Filters ----
-  function searchItems() {
-    const query = document.getElementById("searchInput").value.toLowerCase();
-    const filtered = allItems.filter(i =>
-      i.itemName.toLowerCase().includes(query) ||
-      i.description.toLowerCase().includes(query) ||
-      i.room.toLowerCase().includes(query)
-    );
-    renderItems(filtered);
-  }
+    // Function to close the modal
+    function closeModal() {
+      modal.classList.remove('active');
+    }
 
-  function filterItems() {
-    const type = document.getElementById("typeFilter").value;
-    let filtered = allItems;
-    if (type !== "all") filtered = allItems.filter(i => i.type === type);
-    renderItems(filtered);
-  }
+    // Add listeners to close the modal
+    modalCloseBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(event) {
+      // Only close if the dark background is clicked, not the image itself
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
 
-  function sortItems() {
-    const sort = document.getElementById("sortFilter").value;
-    let sorted = [...allItems];
-    if (sort === "newest") sorted.reverse();
-    if (sort === "oldest") sorted = allItems;
-    if (sort === "name") sorted.sort((a, b) => a.itemName.localeCompare(b.itemName));
-    renderItems(sorted);
-  }
-
-  loadItems();
+    // ==============================
+    //    INITIALIZATION
+    // ==============================
+    loadItems();
+  });
 </script>
 
+
+<div class="image-modal" id="imageModal">
+  <span class="image-modal-close" id="modalCloseBtn">&times;</span>
+  <img src="" alt="Enlarged Item Image" id="modalImage">
+</div>
 
 </body>
 </html>
