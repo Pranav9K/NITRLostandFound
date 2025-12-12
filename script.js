@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const itemsGrid = document.getElementById('itemsGrid');
   let allItems = [];
 
-  // Convert Google Drive links to direct viewable image
 function convertDriveLink(url) {
   if (!url) return "";
   const match = url.match(/[-\w]{25,}/);
