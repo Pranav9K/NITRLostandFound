@@ -51,6 +51,7 @@ function sendOTP() {
   localStorage.setItem("otp", randomNumber.toString());
   localStorage.setItem("otpExpiry", expiry.toString());
   localStorage.setItem("otpEmail", email);
+  localStorage.setItem("Username", email.split("@")[0]);
 
   const parms = {
     passcode: randomNumber,

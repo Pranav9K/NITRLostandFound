@@ -14,6 +14,7 @@
       <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/NIT_Rourkela_Colour_Logo.svg" alt="NIT Rourkela Logo" class="logo-img">
       <span class="logo-text">NIT Rourkela</span>
     </div>
+    <a class="username">userid</a>
     <a href="responses.html" class="nav-button">Lost and Found Items</a>
   </nav>
 
@@ -46,8 +47,17 @@
       </div>
     </div>
   </main>
-
 </body>
+
+
+<script>
+  const userid = localStorage.getItem("Username");  
+  if (userid) {
+    document.querySelector(".username").textContent = userid;
+  } else {
+    document.querySelector(".username").textContent = "Guest";
+  }
+</script>
 
 </html>
 

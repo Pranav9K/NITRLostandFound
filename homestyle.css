@@ -89,6 +89,19 @@ nav:hover {
   text-decoration: none;
 }
 
+.username {
+  background: #ff6b35;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
 .nav-button:hover {
   background: #e55a2b;
   transform: translateY(-2px);
