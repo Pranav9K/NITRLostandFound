@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NIT Rourkela Lost & Found</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="homestyle.css">
+  <link rel="stylesheet" href="styles/homestyle.css">
 </head>
 
 <body>
@@ -14,8 +14,11 @@
       <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/NIT_Rourkela_Colour_Logo.svg" alt="NIT Rourkela Logo" class="logo-img">
       <span class="logo-text">NIT Rourkela</span>
     </div>
-    <a class="username">userid</a>
-    <a href="responses.html" class="nav-button">Lost and Found Items</a>
+    <div class="nav-button">
+      <a class="username">userid</a>
+      <a href="responses.html" class="nav-button">Lost and Found Items</a>
+      <a class="nav-button" href="index.html">Sign Out</a>
+    </div>
   </nav>
 
   <main class="main-content">
@@ -47,18 +50,17 @@
       </div>
     </div>
   </main>
+
+
+  <script>
+    const userid = localStorage.getItem("Username");  
+    if (userid) {
+      document.querySelector(".username").textContent = userid;
+    } else {
+      document.querySelector(".username").textContent = "Guest";
+    }
+  </script> 
 </body>
-
-
-<script>
-  const userid = localStorage.getItem("Username");  
-  if (userid) {
-    document.querySelector(".username").textContent = userid;
-  } else {
-    document.querySelector(".username").textContent = "Guest";
-  }
-</script>
-
 </html>
 
 

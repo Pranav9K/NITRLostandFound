@@ -1,6 +1,3 @@
-/* ==============================
-   RESET
-============================== */
 * {
   margin: 0;
   padding: 0;
@@ -16,7 +13,6 @@ body {
   color: #fff;
 }
 
-/* Overlay for readability */
 body::before {
   content: '';
   position: fixed;
@@ -25,21 +21,14 @@ body::before {
   z-index: -1;
 }
 
-/* ==============================
-   NAVBAR
-============================== */
 nav {
-  background: rgba(0, 0, 0, 0.95);
-  backdrop-filter: blur(10px);
+  background-color: #000;
+  color: #fff;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+  align-items: center;
+  padding: 0.8rem 2rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 nav:hover {
@@ -50,39 +39,49 @@ nav:hover {
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   transition: transform 0.3s ease;
 }
-.logo:hover { transform: scale(1.05); }
+
+.logo:hover {
+  transform: scale(1.05);
+}
 
 .logo-img {
-  height: 45px;
+  height: 30px;
   width: auto;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transition: filter 0.3s ease;
 }
+
+.logo:hover .logo-img {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+}
+
 .logo-text {
   font-size: 1.1rem;
   font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .nav-button {
-  background: #ff6b35;
   color: #fff;
-  padding: 0.7rem 1.4rem;
-  border-radius: 8px;
-  font-weight: 600;
+  border: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
   text-decoration: none;
-  transition: 0.3s ease;
-}
-.nav-button:hover {
-  background: #e55a2b;
-  box-shadow: 0 4px 12px rgba(255,107,53,0.4);
-  transform: translateY(-2px);
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
 }
 
-/* ==============================
-   MAIN CONTENT
-============================== */
+.nav-button:hover {
+  color: #ff6b35;
+}
+
 .main-content {
   padding: 3rem 2rem;
   max-width: 1200px;
@@ -104,9 +103,6 @@ nav:hover {
   font-size: 1.1rem;
 }
 
-/* ==============================
-   SEARCH + FILTER SECTION
-============================== */
 .content-card {
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px);
@@ -181,9 +177,6 @@ nav:hover {
   color: #fff;
 }
 
-/* ==============================
-   GRID LAYOUT
-============================== */
 .items-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -191,9 +184,6 @@ nav:hover {
   margin-top: 2rem;
 }
 
-/* ==============================
-   ITEM CARD STYLING
-============================== */
 .item-card {
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(8px);
@@ -251,7 +241,7 @@ nav:hover {
 .item-image-container {
   margin-top: 10px;
   text-align: center;
-  cursor: pointer; /* indicate clickability */
+  cursor: pointer; 
 }
 
 .item-photo {
@@ -280,19 +270,20 @@ nav:hover {
   text-align: right;
 }
 
-/* ==============================
-   LOADING / EMPTY STATES
-============================== */
 .loading {
   text-align: center;
-  padding: 3rem;
+  padding: 8rem;
   color: rgba(255, 255, 255, 0.7);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .loading-spinner {
   display: inline-block;
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
   border: 3px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   border-top-color: #ff6b35;
@@ -303,14 +294,15 @@ nav:hover {
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .no-items {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
-  padding: 3rem;
+  padding: 8rem;
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* ==============================
-   IMAGE MODAL POPUP
-============================== */
 .image-modal {
   position: fixed;
   top: 0;
@@ -349,9 +341,6 @@ nav:hover {
   user-select: none;
 }
 
-/* ==============================
-   RESPONSIVE
-============================== */
 @media (max-width: 768px) {
   .main-content { padding: 2rem 1rem; }
   .page-title { font-size: 2rem; }
