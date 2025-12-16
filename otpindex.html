@@ -14,7 +14,7 @@
       <h2>Login Using OTP</h2>
       <p>Enter your OTP to login</p>
       <input type="number" placeholder="Enter your OTP" class="otp-box"/>
-      <button onclick="verifyOTP()">Submit</button>
+      <button type="button" onclick="verifyOTP()">Submit</button>
     </div>
   </div>
 
@@ -85,20 +85,5 @@
     })();
   </script>
   <script src="scripts/otpscript.js"></script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-      const otpInput = document.querySelector('.otp-box');
-
-      if (otpInput) {
-          otpInput.addEventListener("keydown", function (e) {
-              if (e.key === "Enter") {
-                  e.preventDefault();
-                  verifyOTP(); 
-              }
-          });
-      }
-  });
-</script>
 </body>
 </html>

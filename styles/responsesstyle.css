@@ -68,18 +68,21 @@ nav:hover {
 }
 
 .nav-button {
-  color: #fff;
-  border: none;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+  padding: 8px 14px;
   text-decoration: none;
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
+  color: white;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
 }
 
 .nav-button:hover {
-  color: #ff6b35;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.username {
+  color: white;
+  margin-right: 12px;
+  cursor: default;
 }
 
 .main-content {
