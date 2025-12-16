@@ -3,15 +3,23 @@ document.addEventListener('DOMContentLoaded', function() {
   const itemsGrid = document.getElementById('itemsGrid');
   let allItems = [];
 
-function convertDriveLink(url) {
-  if (!url) return "";
-  const match = url.match(/[-\w]{25,}/);
-  if (match && match[0]) {
-    const fileId = match[0];
-    return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+function convertDriveLink(input) {
+  if (!input) return "";
+
+  if (Array.isArray(input)) {
+    input = input[0];
   }
-  return "";
+
+  if (typeof input === "string" && input.includes(",")) {
+    input = input.split(",")[0].trim();
+  }
+
+  const match = input.match(/[-\w]{25,}/);
+  if (!match) return "";
+
+  return `https://drive.google.com/thumbnail?id=${match[0]}&sz=w1000`;
 }
+
 
   async function loadItems() {
     try {
@@ -28,7 +36,7 @@ function convertDriveLink(url) {
           entry["Item Photo"] ||
           entry["Item Photo (Upload file)"] ||
           entry["Upload a photo"]
-        ) || ""
+        )
       }));
       renderItems(allItems.slice().reverse());
     } catch(err) {
@@ -48,11 +56,13 @@ function convertDriveLink(url) {
       const card = document.createElement("div");
       card.className = "item-card";
 
-      let imageHTML = item.photo 
-        ? `<div class="item-image-container">
-             <img src="${item.photo}" alt="${item.itemName}" class="item-photo" loading="lazy" onerror="this.style.display='none';">
-           </div>`
-        : `<div class="item-photo-placeholder">No image available</div>`;
+    let imageHTML = (item.photo && item.photo !== "undefined")
+      ? `<div class="item-image-container">
+          <img src="${item.photo}" alt="${item.itemName}" class="item-photo" loading="lazy"
+                onerror="this.parentElement.innerHTML='<div class=\\'item-photo-placeholder\\'>No image available</div>';">
+        </div>`
+      : `<div class="item-photo-placeholder">No image available</div>`;
+
 
       card.innerHTML = `
         <span class="item-type ${item.type}">${item.type}</span>
