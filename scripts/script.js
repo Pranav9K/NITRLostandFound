@@ -24,7 +24,11 @@ function convertDriveLink(url) {
         description: entry["Item Description"] || "No description available.",
         room: entry["Room No:"] || "Not specified",
         contact: entry["Contact Information (Phone No and Name):"] || "Not provided",
-        photo: convertDriveLink(entry["Item Photo"]) || ""
+        photo: convertDriveLink(
+          entry["Item Photo"] ||
+          entry["Item Photo (Upload file)"] ||
+          entry["Upload a photo"]
+        ) || ""
       }));
       renderItems(allItems.slice().reverse());
     } catch(err) {
