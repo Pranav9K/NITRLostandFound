@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NIT Rourkela Lost & Found</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/postitem.css">
+</head>
+
+<body>
+  <nav>
+    <div class="logo">
+      <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/NIT_Rourkela_Colour_Logo.svg" alt="NIT Rourkela Logo" class="logo-img">
+      <span class="logo-text">NIT Rourkela</span>
+    </div>
+    <div class="nav-actions">
+      <a class="username">userid</a>
+      <a href="home.html" class="nav-button">Home</a>
+      <a href="responses.html" class="nav-button">Lost and Found Items</a>
+      <a class="nav-button" href="index.html" onclick='localStorage.removeItem("Username")'>Sign Out</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="title">Post a Lost or Found Item</h1>
+    <form class="item-form" action="/submit-item" method="POST">
+      <label>Item Type:</label>
+      <select name="itemType" required>
+        <option value="" disabled selected>Select an option</option>
+        <option value="lost">Lost</option>
+        <option value="found">Found</option>
+      </select>
+
+      <label>Item Name:</label>
+      <input type="text" name="itemName" required>
+
+      <label>Description:</label>
+      <textarea name="description" required></textarea>
+
+      <label>Date Lost:</label>
+      <input type="date" name="dateLost" required>
+
+      <label>Room No:</label>
+      <input type="text" name="roomNo" required>
+
+      <label>Contact Information:</label>
+      <input type="text" name="contact" required>
+
+      <label>Image Path (for now):</label>
+      <input type="text" name="imagePath" placeholder="uploads/item.jpg" required>
+
+      <button type="submit" class="submit-button">Submit</button>
+    </form> 
+  </div>
+
+  <script>
+    const userid = localStorage.getItem("Username");  
+    if (userid) {
+      document.querySelector(".username").textContent = userid;
+    } else {
+      document.querySelector(".username").textContent = "Guest";
+    }
+  </script> 
+</body>
+</html>

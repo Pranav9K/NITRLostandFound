@@ -26,42 +26,8 @@
       <h1 class="page-title">Lost & Found Items</h1>
       <p class="page-subtitle">Browse through all reported lost and found items from our community</p>
     </div>
-
-    <div class="content-card search-section">
-      <div class="search-form">
-        <input type="text" class="search-input" placeholder="Search for items..." id="searchInput">
-        <button class="search-btn" onclick="searchItems()">Search</button>
-      </div>
-      
-      <div class="filter-section">
-        <select class="filter-select" id="typeFilter" onchange="filterItems()">
-          <option value="all">All Items</option>
-          <option value="lost">Lost Items</option>
-          <option value="found">Found Items</option>
-        </select>
-        
-        <select class="filter-select" id="sortFilter" onchange="sortItems()">
-          <option value="newest">Newest First</option>
-          <option value="oldest">Oldest First</option>
-          <option value="name">Name A-Z</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="content-card">
-      <div class="items-grid" id="itemsGrid">
-        <div class="loading">
-          <div class="loading-spinner"></div>
-          <p>Loading items...</p>
-        </div>
-      </div>
-    </div>
   </main>
-
-  <div class="image-modal" id="imageModal">
-    <span class="image-modal-close" id="modalCloseBtn">&times;</span>
-    <img src="" alt="Enlarged Item Image" id="modalImage">
-  </div>
+  
 
   <script>
     const userid = localStorage.getItem("Username");  
@@ -72,6 +38,6 @@
     }
   </script> 
   <script src="scripts/script.js"></script> 
-
+  
 </body>
 </html>
