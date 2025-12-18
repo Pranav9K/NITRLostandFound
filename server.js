@@ -1,25 +1,22 @@
+// Load environment variables from .env file (for local development)
+require('dotenv').config()
+
 console.log("File started")
 
 const express = require('express')
 const mongoose = require('mongoose')
 const path = require('path')
-const fs = require('fs')
-const port = 3019
+const port = process.env.PORT || 3019
 const app = express()
 
 app.use(express.static(__dirname)) 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-const uploadsDir = path.join(__dirname, 'uploads')
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true })
-  console.log('Created uploads directory')
-}
+// MongoDB Connection (works locally and on Render)
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/lostandfounditems'
 
-app.use('/uploads', express.static(uploadsDir))
-
-mongoose.connect('mongodb://127.0.0.1:27017/lostandfounditems')
+mongoose.connect(MONGODB_URI)
 const db = mongoose.connection
 
 db.once('open', () => {
@@ -76,24 +73,12 @@ const itemSchema = new mongoose.Schema({
 
 const Items = mongoose.model('ItemData', itemSchema)
 
+// Multer setup for handling file uploads
 const multer = require('multer')
-
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, uploadsDir)
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    const ext = path.extname(file.originalname)
-    cb(null, uniqueSuffix + ext)
-  }
-})
-
 const upload = multer({
-  storage: storage,
+  storage: multer.memoryStorage(),
   limits: {
-    fileSize: 10 * 1024 * 1024 
+    fileSize: 10 * 1024 * 1024 // 10MB limit
   },
   fileFilter: (req, file, cb) => {
     if (file.mimetype.startsWith('image/')) {
@@ -104,20 +89,60 @@ const upload = multer({
   }
 })
 
+// Cloudinary setup
+const cloudinary = require('cloudinary').v2
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+})
+
+// Function to upload image to Cloudinary
+async function uploadToCloudinary(file) {
+  try {
+    return new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          folder: 'lost-and-found', // Images will be stored in this folder
+          resource_type: 'image'
+        },
+        (error, result) => {
+          if (error) {
+            console.error('Cloudinary upload error:', error)
+            reject(error)
+          } else {
+            console.log('Cloudinary upload success:', result.secure_url)
+            resolve(result.secure_url)
+          }
+        }
+      )
+      
+      // Send the file buffer to Cloudinary
+      uploadStream.end(file.buffer)
+    })
+  } catch (error) {
+    console.error('Error uploading to Cloudinary:', error)
+    throw error
+  }
+}
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'postitem.html'))
 })
 
+// Handle form submission with image upload
 app.post('/submit-item', upload.single('image'), async (req, res) => {
   try {
     console.log('Received form data:', req.body)
-    console.log('Received file:', req.file ? req.file.filename : 'No file')
+    console.log('Received file:', req.file ? req.file.originalname : 'No file')
 
     let imageUrl = null
 
     if (req.file) {
-      imageUrl = `/uploads/${req.file.filename}`
-      console.log('Image saved locally:', imageUrl)
+      console.log('Uploading image to Cloudinary...')
+      imageUrl = await uploadToCloudinary(req.file)
+      console.log('Image uploaded successfully:', imageUrl)
     }
 
     const item = new Items({
@@ -136,16 +161,22 @@ app.post('/submit-item', upload.single('image'), async (req, res) => {
     res.redirect('/home.html?success=true')
   } catch (err) {
     console.error('Error in submit-item:', err)
-    
-    if (req.file && fs.existsSync(req.file.path)) {
-      fs.unlinkSync(req.file.path)
-      console.log('Cleaned up uploaded file due to error')
-    }
-    
     res.status(500).send(`Error saving item: ${err.message}`)
   }
 })
 
+// API endpoint to get all items (useful for displaying on responses.html)
+app.get('/api/items', async (req, res) => {
+  try {
+    const items = await Items.find().sort({ datePosted: -1 })
+    res.json(items)
+  } catch (err) {
+    console.error('Error fetching items:', err)
+    res.status(500).json({ error: 'Error fetching items' })
+  }
+})
+
+// Error handling middleware
 app.use((err, req, res, next) => {
   if (err instanceof multer.MulterError) {
     if (err.code === 'LIMIT_FILE_SIZE') {
@@ -163,6 +194,6 @@ app.use((err, req, res, next) => {
 })
 
 app.listen(port, () => {
-  console.log("Server started on port", port)
-  console.log(`Uploads will be saved to: ${uploadsDir}`)
+  console.log(`Server started on port ${port}`)
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`)
 })
