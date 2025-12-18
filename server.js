@@ -1,4 +1,3 @@
-// Load environment variables from .env file (for local development)
 require('dotenv').config()
 
 console.log("File started")
@@ -96,12 +95,12 @@ const itemSchema = new mongoose.Schema({
 
 const Items = mongoose.model('ItemData', itemSchema)
 
-// Multer setup for handling file uploads
+
 const multer = require('multer')
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: {
-    fileSize: 10 * 1024 * 1024 // 10MB limit
+    fileSize: 10 * 1024 * 1024 
   },
   fileFilter: (req, file, cb) => {
     if (file.mimetype.startsWith('image/')) {
@@ -112,7 +111,7 @@ const upload = multer({
   }
 })
 
-// Cloudinary setup
+
 const cloudinary = require('cloudinary').v2
 
 cloudinary.config({
@@ -121,13 +120,13 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 })
 
-// Function to upload image to Cloudinary
+
 async function uploadToCloudinary(file) {
   try {
     return new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
         {
-          folder: 'lost-and-found', // Images will be stored in this folder
+          folder: 'lost-and-found', 
           resource_type: 'image'
         },
         (error, result) => {
@@ -141,7 +140,6 @@ async function uploadToCloudinary(file) {
         }
       )
       
-      // Send the file buffer to Cloudinary
       uploadStream.end(file.buffer)
     })
   } catch (error) {
@@ -154,7 +152,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'postitem.html'))
 })
 
-// Handle form submission with image upload
+
 app.post('/submit-item', upload.single('image'), async (req, res) => {
   try {
     console.log('Received form data:', req.body)
@@ -188,7 +186,7 @@ app.post('/submit-item', upload.single('image'), async (req, res) => {
   }
 })
 
-// API endpoint to get all items (useful for displaying on responses.html)
+
 app.get('/api/items', async (req, res) => {
   try {
     const items = await Items.find().sort({ datePosted: -1 })
@@ -199,7 +197,7 @@ app.get('/api/items', async (req, res) => {
   }
 })
 
-// Error handling middleware
+
 app.use((err, req, res, next) => {
   if (err instanceof multer.MulterError) {
     if (err.code === 'LIMIT_FILE_SIZE') {
