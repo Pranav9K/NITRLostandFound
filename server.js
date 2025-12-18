@@ -13,7 +13,26 @@ app.use(express.static(__dirname))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-// MongoDB Connection (works locally and on Render)
+app.get('/home.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'home.html'))
+})
+
+app.get('/index.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'))
+})
+
+app.get('/otpindex.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'otpindex.html'))
+})
+
+app.get('/responses.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'responses.html'))
+})
+
+app.get('/postitem.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'postitem.html'))
+})
+
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/lostandfounditems'
 
 mongoose.connect(MONGODB_URI)

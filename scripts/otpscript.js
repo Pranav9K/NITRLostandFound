@@ -92,7 +92,7 @@ function verifyOTP() {
 
   if (!storedOTP || !storedExpiry) {
     alert("No OTP found. Please request a new OTP.");
-    window.location.href = "index.html";
+    window.location.href = "/index.html";
     return;
   }
 
@@ -101,7 +101,7 @@ function verifyOTP() {
     localStorage.removeItem("otp");
     localStorage.removeItem("otpExpiry");
     localStorage.removeItem("otpEmail");
-    window.location.href = "index.html";
+    window.location.href = "/index.html";
     return;
   }
 
@@ -111,7 +111,7 @@ function verifyOTP() {
     localStorage.removeItem("otp");
     localStorage.removeItem("otpExpiry");
     localStorage.removeItem("otpEmail");
-    window.location.href = "home.html";
+    window.location.href = "/home.html";
   } else {
     alert("Invalid OTP. Please try again.");
   }
