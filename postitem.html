@@ -24,7 +24,7 @@
 
   <div class="container">
     <h1 class="title">Post a Lost or Found Item</h1>
-    <form class="item-form" action="/submit-item" method="POST">
+    <form class="item-form" action="/submit-item" method="POST" enctype="multipart/form-data">
       <label>Item Type:</label>
       <select name="itemType" required>
         <option value="" disabled selected>Select an option</option>
@@ -47,8 +47,8 @@
       <label>Contact Information:</label>
       <input type="text" name="contact" required>
 
-      <label>Image Path (for now):</label>
-      <input type="text" name="imagePath" placeholder="uploads/item.jpg" required>
+      <label>Item Image</label>
+      <input type="file" name="image" accept="image/*" required>
 
       <button type="submit" class="submit-button">Submit</button>
     </form> 
