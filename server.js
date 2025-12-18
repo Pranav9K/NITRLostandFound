@@ -38,6 +38,10 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/lostan
 mongoose.connect(MONGODB_URI)
 const db = mongoose.connection
 
+app.get('/submit-item', (req, res) => {
+  res.redirect('/postitem.html')
+})
+
 db.once('open', () => {
   console.log("Connected to MongoDB")
 })
