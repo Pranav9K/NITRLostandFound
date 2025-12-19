@@ -154,7 +154,7 @@ nav:hover {
 
 /* Item Card */
 .item-card {
-  background: white;
+  background: black;
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -214,12 +214,12 @@ nav:hover {
 .item-name {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #1f2937;
+  color: white;
   margin-bottom: 0.75rem;
 }
 
 .item-description {
-  color: #6b7280;
+  color: white;
   margin-bottom: 1.5rem;
   line-height: 1.6;
 }
@@ -240,13 +240,13 @@ nav:hover {
 
 .detail-label {
   font-weight: 500;
-  color: #6b7280;
+  color: white;
   font-size: 0.9rem;
 }
 
 .detail-value {
   font-weight: 600;
-  color: #1f2937;
+  color: white;
   font-size: 0.9rem;
 }
 
