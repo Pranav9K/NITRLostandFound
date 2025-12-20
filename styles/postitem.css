@@ -110,7 +110,7 @@ nav:hover {
 }
 
 .item-form {
-  background: #ffffff;
+  background: black;
   padding: 25px 30px;
   width: 100%;
   max-width: 1000px;
@@ -119,21 +119,20 @@ nav:hover {
   gap: 12px;
   border-radius: 10px;
   box-shadow: 0 4px 12px #000000;  
+  opacity: 0.8;
 }
 
 .item-form label {
   font-size: 14px;
   font-weight: 600;
-  color: #000000;
+  color: white;
 }
 
 .item-form input,
 .item-form select,
 .item-form textarea {
   padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 10px;
   outline: none;
 }
 

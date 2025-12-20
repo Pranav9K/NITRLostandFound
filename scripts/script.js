@@ -1,4 +1,3 @@
-// Fetch and display items from MongoDB
 async function fetchAndDisplayItems() {
   try {
     const response = await fetch('/api/items');
@@ -27,7 +26,6 @@ function displayItems(items) {
     return;
   }
   
-  // Create filter buttons
   const filterContainer = document.createElement('div');
   filterContainer.className = 'filter-container';
   filterContainer.innerHTML = `
@@ -37,7 +35,6 @@ function displayItems(items) {
   `;
   mainContent.appendChild(filterContainer);
   
-  // Create items container
   const itemsContainer = document.createElement('div');
   itemsContainer.className = 'items-container';
   
@@ -48,7 +45,6 @@ function displayItems(items) {
   
   mainContent.appendChild(itemsContainer);
   
-  // Add filter functionality
   setupFilters();
 }
 
@@ -114,13 +110,11 @@ function setupFilters() {
   
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
-      // Update active button
       filterButtons.forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
       
       const filter = button.getAttribute('data-filter');
       
-      // Filter items
       itemCards.forEach(card => {
         if (filter === 'all' || card.getAttribute('data-type') === filter) {
           card.style.display = 'block';
@@ -147,5 +141,4 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
-// Load items when page loads
 document.addEventListener('DOMContentLoaded', fetchAndDisplayItems);
