@@ -161,3 +161,45 @@ nav:hover {
 .submit-button:hover {
   background: #000000;
 }
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .item-form {
+    max-width: 100%;
+    width: 100%;
+    padding: 20px;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 10px;
+    padding: 1rem;
+  }
+
+  .nav-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .item-form input,
+  .item-form select,
+  .item-form textarea {
+    font-size: 14px;
+  }
+
+  .submit-button {
+    padding: 14px;
+    font-size: 16px;
+  }
+}

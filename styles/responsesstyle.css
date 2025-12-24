@@ -326,3 +326,15 @@ nav:hover {
     gap: 0.25rem;
   }
 }
+
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
