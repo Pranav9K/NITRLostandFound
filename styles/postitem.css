@@ -174,17 +174,6 @@ nav:hover {
     width: 100%;
     padding: 20px;
   }
-
-  nav {
-    flex-direction: column;
-    gap: 10px;
-    padding: 1rem;
-  }
-
-  .nav-actions {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
 }
 
 @media (max-width: 480px) {
@@ -201,5 +190,17 @@ nav:hover {
   .submit-button {
     padding: 14px;
     font-size: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-actions {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
