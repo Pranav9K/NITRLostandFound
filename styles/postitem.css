@@ -24,6 +24,10 @@ body::before {
 /*         UPDATED NAVBAR         */
 /* ------------------------------ */
 
+/* ------------------------------ */
+/*         UPDATED NAVBAR         */
+/* ------------------------------ */
+
 nav {
   background-color: #000;
   color: #fff;
@@ -33,7 +37,7 @@ nav {
   align-items: center;
   padding: 0.8rem 2rem;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 nav:hover {
@@ -53,23 +57,28 @@ nav:hover {
 }
 
 .logo-img {
-  height: 30px;
+  height: 32px;
   width: auto;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-  transition: filter 0.3s ease;
-}
-
-.logo:hover .logo-img {
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
 }
 
 .logo-text {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #fff;
   white-space: nowrap;
-  letter-spacing: -0.02em;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.username {
+  color: white;
+  margin-right: 4px;
+  opacity: 0.9;
 }
 
 .nav-button {
@@ -84,22 +93,44 @@ nav:hover {
   background-color: rgba(255, 255, 255, 0.15);
 }
 
-.username {
-  color: white;
-  margin-right: 12px;
-  cursor: default;
-}
+/* ------------------------------ */
+/*     MUCH BETTER MOBILE NAV     */
+/* ------------------------------ */
 
-/* Mobile Responsive Navbar */
 @media (max-width: 768px) {
   nav {
     flex-direction: column;
-    gap: 1rem;
+    gap: 12px;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .logo {
+    justify-content: center;
   }
 
   .nav-actions {
-    flex-wrap: wrap;
+    width: 100%;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .nav-button {
+    padding: 10px 18px;
+    font-size: 0.95rem;
+  }
+
+  .username {
+    margin-right: 0;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-button {
+    font-size: 0.9rem;
+    padding: 9px 16px;
   }
 }
 
