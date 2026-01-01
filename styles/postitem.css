@@ -211,10 +211,6 @@ nav:hover {
   background: #000000;
 }
 
-/* ------------------------------ */
-/*            MEDIA QUERIES       */
-/* ------------------------------ */
-
 @media (max-width: 768px) {
   .title {
     font-size: 2.5rem;
