@@ -355,11 +355,10 @@ nav:hover {
   background: #000000;
 }
 
-.box {
-  height: 100vh;              /* full screen height */
+.box {          
   display: flex;
-  justify-content: center;    /* horizontal */
-  align-items: center;        /* vertical */
+  justify-content: center;    
+  align-items: center;        
 }
 
 .buttoncenterarea {
