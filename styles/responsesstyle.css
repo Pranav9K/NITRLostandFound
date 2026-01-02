@@ -338,3 +338,30 @@ nav:hover {
     justify-content: center;
   }
 }
+
+.uploadimage {
+  margin-top: 10px;
+  padding: 12px;
+  background: #ff6b35;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.uploadimage:hover {
+  background: #000000;
+}
+
+.box {
+  height: 100vh;              /* full screen height */
+  display: flex;
+  justify-content: center;    /* horizontal */
+  align-items: center;        /* vertical */
+}
+
+.buttoncenterarea {
+  padding: 20px;
+}
