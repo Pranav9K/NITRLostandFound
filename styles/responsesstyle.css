@@ -86,8 +86,8 @@ nav:hover {
   cursor: default;
 }
 
-/* Main Content */
 .main-content {
+  min-width: 600px;
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
