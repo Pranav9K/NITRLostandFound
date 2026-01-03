@@ -400,3 +400,15 @@ nav:hover {
 .buttoncenterarea {
   padding: 20px;
 }
+
+.item-found-btn {
+  padding: 10px 16px;
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
