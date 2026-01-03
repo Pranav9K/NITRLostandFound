@@ -414,17 +414,22 @@ nav:hover {
 }
 
 .item-card.found {
-  border-left: 4px solid green;
+  border-left: 4px solid rgb(68, 138, 68);
 }
 
 .item-card.lost {
-  border-left: 4px solid rgb(255, 98, 0);
+  border-left: 4px solid rgb(205, 120, 67);
 }
 
 .item-found-btn:hover {
-  background-color: #16a34a;
+  background-color: #3a3c44;
 }
 
+.item-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
 
 
 

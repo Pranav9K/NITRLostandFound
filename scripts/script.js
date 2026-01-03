@@ -99,7 +99,6 @@ function createItemCard(item) {
           <span class="detail-value">${datePosted}</span>
         </div>
       </div>
-
       <div class="item-actions">
         <button 
           class="item-found-btn"
