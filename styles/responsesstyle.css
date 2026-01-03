@@ -144,7 +144,30 @@ nav:hover {
   box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
 }
 
-/* Items Container */
+.upload-btn {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.upload-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.upload-btn.active {
+  background: white;
+  color: #667eea;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
 .items-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
