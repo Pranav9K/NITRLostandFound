@@ -248,6 +248,13 @@ nav:hover {
   line-height: 1.6;
 }
 
+.item-rollno {
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 0.75rem;
+}
+
 .item-details {
   display: flex;
   flex-direction: column;
