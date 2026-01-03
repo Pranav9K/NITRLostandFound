@@ -88,7 +88,7 @@ function createItemCard(item) {
         </div>
         <div class="detail-row">
           <span class="detail-label">📍 Location:</span>
-          <span class="detail-value">Room ${escapeHtml(item.roomNo)}</span>
+          <span class="detail-value">Room ${escapeHtml(item.hostelandroomNo)}</span>
         </div>
         <div class="detail-row">
           <span class="detail-label">📞 Contact:</span>

@@ -83,7 +83,7 @@ const itemSchema = new mongoose.Schema({
     default: Date.now
   },
 
-  roomNo: {
+  hostelandroomNo: {
     type: String,
     required: true
   },
@@ -179,7 +179,7 @@ app.post('/submit-item', upload.single('image'), async (req, res) => {
       itemName: req.body.itemName,
       description: req.body.description,
       dateLost: req.body.dateLost,
-      roomNo: req.body.roomNo,
+      hostelandroomNo: req.body.hostelandroomNo,
       contact: req.body.contact,
       imageUrl: imageUrl
     })
