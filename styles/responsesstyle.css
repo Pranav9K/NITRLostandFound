@@ -120,7 +120,7 @@ nav:hover {
   flex-wrap: wrap;
 }
 
-.filter-btn {
+.fillter-btn {
   padding: 0.75rem 2rem;
   font-size: 1rem;
   font-weight: 500;
@@ -251,6 +251,12 @@ nav:hover {
   font-size: 0.9rem;
 }
 
+.responsestext {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: white;
+}
+
 /* No Items / Error Message */
 .no-items,
 .error-message {
@@ -339,7 +345,7 @@ nav:hover {
   }
 }
 
-.uploadimage {
+ .uploadimage { 
   margin-top: 10px;
   padding: 12px;
   background: #ff6b35;
@@ -353,7 +359,7 @@ nav:hover {
 
 .uploadimage:hover {
   background: #000000;
-}
+} 
 
 .box {          
   display: flex;
