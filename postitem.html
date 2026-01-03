@@ -26,6 +26,9 @@
     <h1 class="title">Post a Lost or Found Item</h1>
     <form class="item-form" action="/submit-item" method="POST" enctype="multipart/form-data">
 
+      <label>Roll No:</label>
+      <input type="hidden" name="rollno" id="rollno">
+
       <label>Item Type:</label>
       <select name="itemType" required>
         <option value="" disabled selected>Select an option</option>
@@ -57,7 +60,7 @@
 
   <script>
     const userid = localStorage.getItem("Username");
-      
+
     if (userid) {
       document.querySelector(".username").textContent = userid;
     } else {

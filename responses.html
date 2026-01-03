@@ -41,7 +41,7 @@
 
   <script>
     const userid = localStorage.getItem("Username");  
-    
+
     if (userid) {
       document.querySelector(".username").textContent = userid;
     } else {
@@ -51,7 +51,6 @@
     function pick() {
       document.getElementById("imageInput").click();
     }
-
     document.getElementById("imageInput").onchange = function () {
       var file = this.files[0];
       var reader = new FileReader();
@@ -69,8 +68,15 @@
 
         btn.classList.add("active");
     });
-});
+  });
 
+    if (!userid) {
+      alert("Please login again");
+      window.location.href = "index.html";
+    }
+
+    document.querySelector(".username").textContent = userid;
+    document.getElementById("rollno").value = userid;
   </script> 
   <script src="scripts/script.js"></script>
 </body>

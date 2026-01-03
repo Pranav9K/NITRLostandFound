@@ -49,7 +49,6 @@ db.on('error', (err) => {
   console.error("MongoDB connection error:", err)
 })
 
-const userid = localStorage.getItem("Username"); 
 
 const itemSchema = new mongoose.Schema({
   itemType: {
@@ -59,7 +58,6 @@ const itemSchema = new mongoose.Schema({
   },
 
   rollno: {
-    value: userid,
     type: Number,
     required: true
   },
