@@ -49,10 +49,18 @@ db.on('error', (err) => {
   console.error("MongoDB connection error:", err)
 })
 
+const userid = localStorage.getItem("Username"); 
+
 const itemSchema = new mongoose.Schema({
   itemType: {
     type: String,
     enum: ['lost', 'found'],
+    required: true
+  },
+
+  rollno: {
+    value: userid,
+    type: Number,
     required: true
   },
 
@@ -167,6 +175,7 @@ app.post('/submit-item', upload.single('image'), async (req, res) => {
     }
 
     const item = new Items({
+      rollno: req.body.rollno,
       itemType: req.body.itemType,
       itemName: req.body.itemName,
       description: req.body.description,
@@ -218,3 +227,4 @@ app.listen(port, () => {
   console.log(`Server started on port ${port}`)
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`)
 })
+
