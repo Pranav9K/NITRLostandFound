@@ -269,6 +269,7 @@ nav:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: white;
 }
 
 .detail-label {
@@ -289,7 +290,7 @@ nav:hover {
   color: white;
 }
 
-/* No Items / Error Message */
+
 .no-items,
 .error-message {
   background: rgba(255, 255, 255, 0.95);
