@@ -87,8 +87,8 @@ function createItemCard(item) {
           <span class="detail-value">${dateLost}</span>
         </div>
         <div class="detail-row">
-          <span class="detail-label">📍 Location:</span>
-          <span class="detail-value">Room ${escapeHtml(item.hostelandroomNo)}</span>
+          <span class="detail-label">📍 Hostel/Room No:</span>
+          <span class="detail-value">${escapeHtml(item.hostelandroomNo)}</span>
         </div>
         <div class="detail-row">
           <span class="detail-label">📞 Contact:</span>
@@ -98,6 +98,10 @@ function createItemCard(item) {
           <span class="detail-label">🕒 Posted:</span>
           <span class="detail-value">${datePosted}</span>
         </div>
+      </div>
+
+      <div class="item-actions">
+        <button class="item-found-btn" onclick="handleItemFound('${item.itemType}')">Item Found</button>
       </div>
     </div>
   `;
