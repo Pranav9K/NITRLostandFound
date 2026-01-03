@@ -27,7 +27,7 @@
     <form class="item-form" action="/submit-item" method="POST" enctype="multipart/form-data">
 
       <label class="rollno">Roll No:</label>
-      <input type="hidden" name="rollno">
+      <input type="hidden" name="rollno" id="rollno">
 
       <label>Item Type:</label>
       <select name="itemType" required>
@@ -62,6 +62,7 @@
     const userid = localStorage.getItem("Username");
     
     document.querySelector(".rollno").textContent = userid;
+    document.getElementById("rollno").value = userid;
 
     if (userid) {
       document.querySelector(".username").textContent = userid;

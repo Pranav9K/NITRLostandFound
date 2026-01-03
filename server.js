@@ -51,6 +51,12 @@ db.on('error', (err) => {
 
 
 const itemSchema = new mongoose.Schema({
+
+  rollno: {
+    type: String,
+    required: true
+  },
+
   itemType: {
     type: String,
     enum: ['lost', 'found'],
@@ -168,6 +174,7 @@ app.post('/submit-item', upload.single('image'), async (req, res) => {
     }
 
     const item = new Items({
+      rollno: req.body.rollno,
       itemType: req.body.itemType,
       itemName: req.body.itemName,
       description: req.body.description,
