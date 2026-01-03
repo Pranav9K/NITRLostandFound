@@ -1,11 +1,8 @@
 async function fetchAndDisplayItems() {
   try {
     const response = await fetch('/api/items');
-    
-    if (!response.ok) {
-      throw new Error('Failed to fetch items');
-    }
-    
+    if (!response.ok) throw new Error('Failed to fetch items');
+
     const items = await response.json();
     displayItems(items);
   } catch (error) {
@@ -15,17 +12,15 @@ async function fetchAndDisplayItems() {
 }
 
 function displayItems(items) {
-  const mainContent = document.querySelector('.main-content');
-  
+  const root = document.getElementById('items-root');
+  root.innerHTML = ''; // ONLY clear items area
+
   if (items.length === 0) {
-    mainContent.innerHTML += `
-      <div class="no-items">
-        <p>No items have been posted yet.</p>
-      </div>
-    `;
+    root.innerHTML = `<p>No items posted yet.</p>`;
     return;
   }
-  
+
+  // Filters
   const filterContainer = document.createElement('div');
   filterContainer.className = 'filter-container';
   filterContainer.innerHTML = `
@@ -33,138 +28,96 @@ function displayItems(items) {
     <button class="filter-btn" data-filter="lost">Lost Items</button>
     <button class="filter-btn" data-filter="found">Found Items</button>
   `;
-  mainContent.appendChild(filterContainer);
-  
+  root.appendChild(filterContainer);
+
+  // Items container
   const itemsContainer = document.createElement('div');
   itemsContainer.className = 'items-container';
-  
+
   items.forEach(item => {
-    const itemCard = createItemCard(item);
-    itemsContainer.appendChild(itemCard);
+    itemsContainer.appendChild(createItemCard(item));
   });
-  
-  mainContent.appendChild(itemsContainer);
-  
+
+  root.appendChild(itemsContainer);
   setupFilters();
 }
 
 function createItemCard(item) {
   const card = document.createElement('div');
   card.className = `item-card ${item.itemType}`;
-  card.setAttribute('data-type', item.itemType);
-  
-  const datePosted = new Date(item.datePosted).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
-  });
-  
-  const dateLost = new Date(item.dateLost).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
-  });
-  
+  card.dataset.type = item.itemType;
+
+  const dateLost = new Date(item.dateLost).toLocaleDateString();
+  const datePosted = new Date(item.datePosted).toLocaleDateString();
+
   card.innerHTML = `
     <div class="item-badge ${item.itemType}">
       ${item.itemType === 'lost' ? '🔍 Lost' : '📢 Found'}
     </div>
-    
+
     ${item.imageUrl ? `
       <div class="item-image">
-        <img src="${item.imageUrl}" alt="${item.itemName}" loading="lazy">
-      </div>
-    ` : ''}
-    
+        <img src="${item.imageUrl}" alt="${item.itemName}">
+      </div>` : ''}
+
     <div class="item-content">
-      <h2 class="item-rollno">Roll No: ${escapeHtml(item.rollno)}</h2>
-      <h3 class="item-name">${escapeHtml(item.itemName)}</h3>
-      <p class="item-description">${escapeHtml(item.description)}</p>
-      
-      <div class="item-details">
-        <div class="detail-row">
-          <span class="detail-label">📅 Date ${item.itemType === 'lost' ? 'Lost' : 'Found'}:</span>
-          <span class="detail-value">${dateLost}</span>
-        </div>
-        <div class="detail-row">
-          <span class="detail-label">📍 Hostel/Room No:</span>
-          <span class="detail-value">${escapeHtml(item.hostelandroomNo)}</span>
-        </div>
-        <div class="detail-row">
-          <span class="detail-label">📞 Contact:</span>
-          <span class="detail-value">${escapeHtml(item.contact)}</span>
-        </div>
-        <div class="detail-row">
-          <span class="detail-label">🕒 Posted:</span>
-          <span class="detail-value">${datePosted}</span>
-        </div>
-      </div>
-      <div class="item-actions">
-        <button 
-          class="item-found-btn"
-          onclick="toggleItemType('${item._id}')">
-          ${item.itemType === 'lost' ? 'Mark as Found' : 'Mark as Lost'}
-        </button>
-      </div>
+      <h2>Roll No: ${escapeHtml(item.rollno)}</h2>
+      <h3>${escapeHtml(item.itemName)}</h3>
+      <p>${escapeHtml(item.description)}</p>
+
+      <p>📅 ${dateLost}</p>
+      <p>📍 ${escapeHtml(item.hostelandroomNo)}</p>
+      <p>📞 ${escapeHtml(item.contact)}</p>
+      <p>🕒 ${datePosted}</p>
+
+      <button class="item-found-btn"
+        onclick="toggleItemType('${item._id}')">
+        ${item.itemType === 'lost' ? 'Mark as Found' : 'Mark as Lost'}
+      </button>
     </div>
   `;
-  
+
   return card;
 }
 
 function setupFilters() {
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  const itemCards = document.querySelectorAll('.item-card');
-  
-  filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      filterButtons.forEach(btn => btn.classList.remove('active'));
-      button.classList.add('active');
-      
-      const filter = button.getAttribute('data-filter');
-      
-      itemCards.forEach(card => {
-        if (filter === 'all' || card.getAttribute('data-type') === filter) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
+  const buttons = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.item-card');
+
+  buttons.forEach(btn => {
+    btn.onclick = () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter;
+      cards.forEach(card => {
+        card.style.display =
+          filter === 'all' || card.dataset.type === filter
+            ? 'block'
+            : 'none';
       });
-    });
+    };
   });
 }
 
-function displayError() {
-  const mainContent = document.querySelector('.main-content');
-  mainContent.innerHTML += `
-    <div class="error-message">
-      <p>⚠️ Unable to load items. Please try again later.</p>
-    </div>
-  `;
+async function toggleItemType(id) {
+  try {
+    await fetch(`/api/items/${id}/toggle`, { method: 'PATCH' });
+    fetchAndDisplayItems(); // NO layout destruction
+  } catch {
+    alert("Failed to update item");
+  }
 }
 
 function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
+  const d = document.createElement('div');
+  d.textContent = text;
+  return d.innerHTML;
 }
 
-async function toggleItemType(itemId) {
-  try {
-    const response = await fetch(`/api/items/${itemId}/toggle`, {
-      method: "PATCH"
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to toggle item type");
-    }
-
-    document.querySelector('.main-content').innerHTML = '';
-    fetchAndDisplayItems();
-  } catch (err) {
-    console.error(err);
-    alert("Error updating item status");
-  }
+function displayError() {
+  document.getElementById('items-root').innerHTML =
+    `<p>Error loading items.</p>`;
 }
 
 document.addEventListener('DOMContentLoaded', fetchAndDisplayItems);
