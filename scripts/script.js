@@ -43,10 +43,12 @@ function displayItems(items) {
 }
 
 function createItemCard(item) {
+  const loggedInUser = localStorage.getItem("Username");
+  const isOwner = loggedInUser && item.rollno === loggedInUser;
+
   const card = document.createElement('div');
   card.className = `item-card ${item.itemType}`;
   card.dataset.type = item.itemType;
-
   const dateLost = new Date(item.dateLost).toLocaleDateString();
   const datePosted = new Date(item.datePosted).toLocaleDateString();
 
@@ -70,10 +72,12 @@ function createItemCard(item) {
       <p>📞 ${escapeHtml(item.contact)}</p>
       <p>🕒 ${datePosted}</p>
 
-      <button class="item-found-btn"
-        onclick="toggleItemType('${item._id}')">
-        ${item.itemType === 'lost' ? 'Mark as Found' : 'Mark as Lost'}
-      </button>
+      ${isOwner ? `
+          <button class="item-found-btn"
+            onclick="toggleItemType('${item._id}')">
+            ${item.itemType === 'lost' ? 'Mark as Found' : 'Mark as Lost'}
+          </button>
+        ` : ''}
     </div>
   `;
 
