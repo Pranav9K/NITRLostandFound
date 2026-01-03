@@ -57,11 +57,6 @@ const itemSchema = new mongoose.Schema({
     required: true
   },
 
-  rollno: {
-    type: Number,
-    required: true
-  },
-
   itemName: {
     type: String,
     required: true
@@ -173,7 +168,6 @@ app.post('/submit-item', upload.single('image'), async (req, res) => {
     }
 
     const item = new Items({
-      rollno: req.body.rollno,
       itemType: req.body.itemType,
       itemName: req.body.itemName,
       description: req.body.description,

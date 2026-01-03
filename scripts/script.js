@@ -14,8 +14,6 @@ async function fetchAndDisplayItems() {
   }
 }
 
-const userid = localStorage.getItem("Username");
-
 function displayItems(items) {
   const mainContent = document.querySelector('.main-content');
   
@@ -79,7 +77,6 @@ function createItemCard(item) {
     ` : ''}
     
     <div class="item-content">
-      <h2 class="roll-no">${escapeHtml(item.rollno)}</h2>
       <h3 class="item-name">${escapeHtml(item.itemName)}</h3>
       <p class="item-description">${escapeHtml(item.description)}</p>
       

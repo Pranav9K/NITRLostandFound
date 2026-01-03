@@ -26,8 +26,8 @@
     <h1 class="title">Post a Lost or Found Item</h1>
     <form class="item-form" action="/submit-item" method="POST" enctype="multipart/form-data">
 
-      <label>Roll No: {userid}</label>
-      <input type="hidden" name="rollno" id="rollno">
+      <label class="rollno">Roll No:</label>
+      <input type="hidden" name="rollno">
 
       <label>Item Type:</label>
       <select name="itemType" required>
@@ -61,7 +61,7 @@
   <script>
     const userid = localStorage.getItem("Username");
     
-    document.getElementById("rollno").value = userid;
+    document.querySelector(".rollno").textContent = userid;
 
     if (userid) {
       document.querySelector(".username").textContent = userid;
