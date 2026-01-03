@@ -412,3 +412,20 @@ nav:hover {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
+.item-card.found {
+  border-left: 4px solid green;
+}
+
+.item-card.lost {
+  border-left: 4px solid rgb(255, 98, 0);
+}
+
+.item-found-btn:hover {
+  background-color: #16a34a;
+}
+
+
+
+
+

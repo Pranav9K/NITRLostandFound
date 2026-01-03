@@ -227,3 +227,20 @@ app.listen(port, () => {
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`)
 })
 
+app.patch('/api/items/:id/toggle', async (req, res) => {
+  try {
+    const item = await Items.findById(req.params.id);
+
+    if (!item) {
+      return res.status(404).json({ error: 'Item not found' });
+    }
+
+    item.itemType = item.itemType === 'lost' ? 'found' : 'lost';
+    await item.save();
+
+    res.json({ success: true, item });
+  } catch (err) {
+    console.error('Toggle error:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});

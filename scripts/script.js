@@ -101,7 +101,11 @@ function createItemCard(item) {
       </div>
 
       <div class="item-actions">
-        <button class="item-found-btn" onclick="handleItemFound('${item.itemType}')">Item Found</button>
+        <button 
+          class="item-found-btn"
+          onclick="toggleItemType('${item._id}')">
+          ${item.itemType === 'lost' ? 'Mark as Found' : 'Mark as Lost'}
+        </button>
       </div>
     </div>
   `;
@@ -144,6 +148,24 @@ function escapeHtml(text) {
   const div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
+}
+
+async function toggleItemType(itemId) {
+  try {
+    const response = await fetch(`/api/items/${itemId}/toggle`, {
+      method: "PATCH"
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to toggle item type");
+    }
+
+    document.querySelector('.main-content').innerHTML = '';
+    fetchAndDisplayItems();
+  } catch (err) {
+    console.error(err);
+    alert("Error updating item status");
+  }
 }
 
 document.addEventListener('DOMContentLoaded', fetchAndDisplayItems);
