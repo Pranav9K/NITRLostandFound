@@ -162,15 +162,14 @@ app.get('/', (req, res) => {
 
 app.post('/submit-item', upload.single('image'), async (req, res) => {
   try {
-    console.log('Received form data:', req.body)
-    console.log('Received file:', req.file ? req.file.originalname : 'No file')
+    if (!req.body.rollno) {
+      return res.status(400).send("User not logged in");
+    }
 
-    let imageUrl = null
+    let imageUrl = null;
 
     if (req.file) {
-      console.log('Uploading image to Cloudinary...')
-      imageUrl = await uploadToCloudinary(req.file)
-      console.log('Image uploaded successfully:', imageUrl)
+      imageUrl = await uploadToCloudinary(req.file);
     }
 
     const item = new Items({
@@ -181,19 +180,17 @@ app.post('/submit-item', upload.single('image'), async (req, res) => {
       dateLost: req.body.dateLost,
       hostelandroomNo: req.body.hostelandroomNo,
       contact: req.body.contact,
-      imageUrl: imageUrl
-    })
+      imageUrl
+    });
 
-    await item.save()
-    console.log('Item saved to MongoDB successfully')
-    
-    res.redirect('/home.html?success=true')
+    await item.save();
+    res.redirect('/home.html?success=true');
+
   } catch (err) {
-    console.error('Error in submit-item:', err)
-    res.status(500).send(`Error saving item: ${err.message}`)
+    console.error(err);
+    res.status(500).send(err.message);
   }
-})
-
+});
 
 app.get('/api/items', async (req, res) => {
   try {

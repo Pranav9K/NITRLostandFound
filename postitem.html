@@ -69,6 +69,16 @@
     } else {
       document.querySelector(".username").textContent = "Guest";
     }
-  </script> 
+
+    if (!userid) {
+      alert("Please login again");
+      window.location.href = "index.html";
+    }
+
+    document.querySelector(".rollno").textContent = userid;
+    document.getElementById("rollno").value = userid;
+    document.querySelector(".username").textContent = userid;
+  </script>
+
 </body>
 </html>
