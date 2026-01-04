@@ -16,9 +16,13 @@ function displayItems(items) {
   root.innerHTML = ''; // ONLY clear items area
 
   if (items.length === 0) {
-    root.innerHTML = `<p>No items posted yet.</p>`;
-    return;
-  }
+  root.innerHTML = `
+    <div style="text-align:center; padding:40px; color:#666; font-size:18px;">
+      No items posted yet.
+    </div>
+  `;
+  return;
+}
 
   // Filters
   const filterContainer = document.createElement('div');
