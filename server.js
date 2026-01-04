@@ -155,10 +155,6 @@ async function uploadToCloudinary(file) {
   }
 }
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'postitem.html'))
-})
-
 
 app.post('/submit-item', upload.single('image'), async (req, res) => {
   try {
