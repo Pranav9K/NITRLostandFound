@@ -227,20 +227,18 @@ app.listen(port, () => {
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`)
 })
 
-app.patch('/api/items/:id/toggle', async (req, res) => {
+app.delete('/api/items/:id', async (req, res) => {
   try {
-    const item = await Items.findById(req.params.id);
+    const deletedItem = await Items.findByIdAndDelete(req.params.id);
 
-    if (!item) {
+    if (!deletedItem) {
       return res.status(404).json({ error: 'Item not found' });
     }
 
-    item.itemType = item.itemType === 'lost' ? 'found' : 'lost';
-    await item.save();
-
-    res.json({ success: true, item });
+    res.json({ success: true });
   } catch (err) {
-    console.error('Toggle error:', err);
+    console.error('Delete error:', err);
     res.status(500).json({ error: 'Server error' });
   }
 });
+

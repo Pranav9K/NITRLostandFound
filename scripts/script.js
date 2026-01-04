@@ -73,10 +73,12 @@ function createItemCard(item) {
       <p>🕒 ${datePosted}</p>
 
       ${isOwner ? `
-          <button class="item-found-btn"
-            onclick="toggleItemType('${item._id}')">
-            ${item.itemType === 'lost' ? 'Mark as Found' : 'Mark as Lost'}
-          </button>
+          ${isOwner && item.itemType === 'lost' ? `
+            <button class="item-found-btn"
+              onclick="markAsFound('${item._id}')">
+              ✅ Mark as Found
+            </button>
+          ` : ''}
         ` : ''}
     </div>
   `;
@@ -123,5 +125,29 @@ function displayError() {
   document.getElementById('items-root').innerHTML =
     `<p>Error loading items.</p>`;
 }
+
+async function markAsFound(id) {
+  const confirmAction = confirm(
+    "Are you sure you want to mark this item as FOUND?\nThis will permanently remove the post."
+  );
+
+  if (!confirmAction) return;
+
+  try {
+    const res = await fetch(`/api/items/${id}`, {
+      method: 'DELETE'
+    });
+
+    if (!res.ok) {
+      throw new Error("Delete failed");
+    }
+
+    fetchAndDisplayItems(); // refresh without breaking layout
+  } catch (err) {
+    alert("Failed to mark item as found");
+    console.error(err);
+  }
+}
+
 
 document.addEventListener('DOMContentLoaded', fetchAndDisplayItems);
