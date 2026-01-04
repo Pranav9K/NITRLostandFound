@@ -51,6 +51,7 @@ function createItemCard(item) {
   const isOwner = loggedInUser && item.rollno === loggedInUser;
 
   const card = document.createElement('div');
+  card.dataset.id = item._id;
   card.className = `item-card ${item.itemType}`;
   card.dataset.type = item.itemType;
   const dateLost = new Date(item.dateLost).toLocaleDateString();

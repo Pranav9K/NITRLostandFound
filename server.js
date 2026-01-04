@@ -233,3 +233,29 @@ app.delete('/api/items/:id', async (req, res) => {
   }
 });
 
+const fetch = require("node-fetch");
+
+app.post("/api/match-image", async (req, res) => {
+  try {
+    const image = req.body.image;
+    if (!image) return res.json({ matchId: null });
+
+    const items = await Items.find({ imageUrl: { $ne: null } });
+
+    const aiRes = await fetch("http://127.0.0.1:5001/match", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        image,
+        items
+      })
+    });
+
+    const result = await aiRes.json();
+    res.json(result);
+
+  } catch (err) {
+    console.error("AI match error:", err);
+    res.json({ matchId: null });
+  }
+});
