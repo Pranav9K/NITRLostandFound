@@ -163,7 +163,6 @@ app.post('/submit-item', upload.single('image'), async (req, res) => {
     }
 
     let imageUrl = null;
-
     if (req.file) {
       imageUrl = await uploadToCloudinary(req.file);
     }
@@ -180,13 +179,12 @@ app.post('/submit-item', upload.single('image'), async (req, res) => {
     });
 
     await item.save();
-    res.redirect('/home.html?success=true');
-
+    res.redirect('/responses.html');
   } catch (err) {
-    console.error(err);
     res.status(500).send(err.message);
   }
 });
+
 
 app.get('/api/items', async (req, res) => {
   try {
