@@ -233,7 +233,7 @@ app.delete('/api/items/:id', async (req, res) => {
   }
 });
 
-const aiRes = await fetch("http://127.0.0.1:5001/match", { ... });
+const fetch = require("node-fetch");
 
 
 app.post("/api/match-image", async (req, res) => {
