@@ -7,8 +7,12 @@ Only users with a valid @nitrkl.ac.in email can sign up and access the platform,
 
 Key Features
 
-🔐 Secure Login – Access restricted to NITR students (Google OAuth with nitrkl domain check).
+🔐 Secure Login – Access restricted to NITR students (GMail OTP Auth with nitrkl domain check).
+
 📌 Post Lost/Found Items – Upload images, descriptions, and locations.
+
 🔎 Smart Search – Easily browse or filter items.
+
 📬 Contact System – Reach out to the finder/owner safely.
+
 📱 Clean UI – Fast, mobile-friendly, and minimal design.
