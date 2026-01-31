@@ -1,9 +1,11 @@
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* BODY */
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: url("https://i.postimg.cc/3Jpg758L/NIT-Rourkela-1200x768.jpg") center center / cover no-repeat fixed;
@@ -20,21 +22,27 @@ body::before {
   z-index: -1;
 }
 
+/* NAVBAR (MATCHES HOME.HTML EXACTLY) */
 nav {
-  background-color: #000;
-  color: #fff;
-  font-weight: 800;
+  width: 100%;
+  height: 70px;
+  background: #000;
+  color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.8rem 2rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  opacity: 0.8;
+  padding: 0 2rem;
+  font-weight: 800;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  opacity: 0.85;
+  transition: 0.3s ease;
 }
 
 nav:hover {
   background: rgba(0, 0, 0, 0.98);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
 }
 
 .logo {
@@ -49,43 +57,73 @@ nav:hover {
 }
 
 .logo-img {
-  height: 30px;
+  height: 40px;
   width: auto;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-  transition: filter 0.3s ease;
-}
-
-.logo:hover .logo-img {
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
 }
 
 .logo-text {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  color: #fff;
+  color: white;
   white-space: nowrap;
-  letter-spacing: -0.02em;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.nav-button {
-  padding: 8px 14px;
-  text-decoration: none;
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-button, .username {
   color: white;
+  text-decoration: none;
+  padding: 8px 15px;
   border-radius: 6px;
   transition: background-color 0.2s ease;
+  font-size: 0.95rem;
 }
 
 .nav-button:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255,255,255,0.15);
 }
 
 .username {
-  color: white;
-  margin-right: 12px;
   cursor: default;
 }
 
+/* HAMBURGER MENU */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+}
+
+/* MOBILE NAV */
+@media (max-width: 768px) {
+
+  .hamburger {
+    display: block;
+  }
+
+  .nav-actions {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background: #000;
+    width: 100%;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.2rem 0;
+    display: none;
+  }
+
+  .nav-actions.active {
+    display: flex;
+  }
+}
+
+/* MAIN CONTENT */
 .main-content {
   min-width: 600px;
   max-width: 1400px;
@@ -103,7 +141,6 @@ nav:hover {
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .page-subtitle {
@@ -111,7 +148,7 @@ nav:hover {
   opacity: 0.9;
 }
 
-/* Filter Container */
+/* FILTERS */
 .filter-container {
   display: flex;
   justify-content: center;
@@ -123,7 +160,6 @@ nav:hover {
 .filter-btn {
   padding: 0.75rem 2rem;
   font-size: 1rem;
-  font-weight: 500;
   border: none;
   border-radius: 25px;
   background: rgba(255, 255, 255, 0.2);
@@ -134,23 +170,22 @@ nav:hover {
 }
 
 .filter-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.35);
   transform: translateY(-2px);
 }
 
 .filter-btn.active {
   background: white;
   color: #667eea;
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
 }
 
+/* UPLOAD BUTTON */
 .upload-btn {
   padding: 0.75rem 2rem;
   font-size: 1rem;
-  font-weight: 500;
-  border: none;
   border-radius: 25px;
-  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  background: rgba(255,255,255,0.2);
   color: white;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -158,37 +193,46 @@ nav:hover {
 }
 
 .upload-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.35);
   transform: translateY(-2px);
 }
 
-.upload-btn.active {
-  background: white;
-  color: #667eea;
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.buttoncenterarea {
+  padding: 20px;
+}
+
+.responsestext {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: white;
+}
+
+/* GRID */
 .items-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px,1fr));
   gap: 2rem;
   margin-top: 2rem;
 }
 
-/* Item Card */
+/* ITEM CARD */
 .item-card {
   background: black;
   opacity: 0.8;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
+  transition: 0.3s ease;
   position: relative;
 }
 
 .item-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
 .item-badge {
@@ -204,27 +248,24 @@ nav:hover {
 }
 
 .item-badge.lost {
-  background: rgba(239, 68, 68, 0.9);
-  color: white;
+  background: rgba(239,68,68,0.9);
 }
 
 .item-badge.found {
-  background: rgba(34, 197, 94, 0.9);
-  color: white;
+  background: rgba(34,197,94,0.9);
 }
 
 .item-image {
   width: 100%;
   height: 250px;
   overflow: hidden;
-  background: #f3f4f6;
 }
 
 .item-image img {
-  width: 100%;
   height: 100%;
+  width: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: 0.3s ease;
 }
 
 .item-card:hover .item-image img {
@@ -233,26 +274,21 @@ nav:hover {
 
 .item-content {
   padding: 1.5rem;
-  color: white
+  color: white;
 }
 
 .item-name {
   font-size: 1.5rem;
   font-weight: 700;
-  color: white;
   margin-bottom: 0.75rem;
 }
 
 .item-description {
-  color: white;
   margin-bottom: 1.5rem;
-  line-height: 1.6;
 }
 
 .item-rollno {
   font-size: 1rem;
-  font-weight: 500;
-  color: white;
   margin-bottom: 0.75rem;
 }
 
@@ -260,50 +296,46 @@ nav:hover {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  border-top: 1px solid #e5e7eb;
   padding-top: 1rem;
-  color: white;
 }
 
 .detail-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  color: white;
 }
 
-.detail-label {
-  font-weight: 500;
-  color: white;
-  font-size: 0.9rem;
-}
-
+.detail-label,
 .detail-value {
-  font-weight: 600;
-  color: white;
-  font-size: 0.9rem;
+  font-weight: 500;
 }
 
-.responsestext {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: white;
+.item-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
 }
 
+/* FOUND/LOST BORDER */
+.item-card.found {
+  border-left: 4px solid rgb(68, 138, 68);
+}
 
+.item-card.lost {
+  border-left: 4px solid rgb(205, 120, 67);
+}
+
+/* NO ITEMS BOX */
 .no-items,
 .error-message {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255,255,255,0.95);
   padding: 3rem;
   border-radius: 15px;
-  text-align: center;
   max-width: 600px;
   margin: 2rem auto;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
 
-.no-items p,
-.error-message p {
+.no-items p {
   font-size: 1.2rem;
   color: #6b7280;
 }
@@ -312,24 +344,12 @@ nav:hover {
   color: #dc2626;
 }
 
-/* Responsive Design */
+/* MOBILE CONTENT FIXES */
 @media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    gap: 1rem;
-  }
 
-  .nav-actions {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .page-title {
-    font-size: 2rem;
-  }
-
-  .page-subtitle {
-    font-size: 1rem;
+  .main-content {
+    min-width: unset;
+    padding: 1.2rem;
   }
 
   .items-container {
@@ -347,13 +367,6 @@ nav:hover {
 }
 
 @media (max-width: 480px) {
-  .main-content {
-    padding: 1rem;
-  }
-
-  .item-content {
-    padding: 1rem;
-  }
 
   .item-name {
     font-size: 1.25rem;
@@ -361,79 +374,6 @@ nav:hover {
 
   .detail-row {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.25rem;
+    gap: 0.3rem;
   }
 }
-
-@media (max-width: 600px) {
-  nav {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .nav-actions {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-}
-
- .uploadimage { 
-  margin-top: 10px;
-  padding: 12px;
-  background: #ff6b35;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.uploadimage:hover {
-  background: #000000;
-} 
-
-.box {          
-  display: flex;
-  justify-content: center;    
-  align-items: center;        
-}
-
-.buttoncenterarea {
-  padding: 20px;
-}
-
-.item-found-btn {
-  padding: 10px 16px;
-  background-color: #003b4e;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.item-card.found {
-  border-left: 4px solid rgb(68, 138, 68);
-}
-
-.item-card.lost {
-  border-left: 4px solid rgb(205, 120, 67);
-}
-
-.item-found-btn:hover {
-  background-color: #3a3c44;
-}
-
-.item-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-
-
-

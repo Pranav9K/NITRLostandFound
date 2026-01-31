@@ -9,17 +9,27 @@
 </head>
 
 <body>
-  <nav>
+  <nav class="navbar">
     <div class="logo">
-      <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/NIT_Rourkela_Colour_Logo.svg" alt="NIT Rourkela Logo" class="logo-img">
+      <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/NIT_Rourkela_Colour_Logo.svg"
+          alt="NIT Rourkela Logo" class="logo-img">
       <span class="logo-text">NIT Rourkela</span>
     </div>
-    <div class="nav-actions">
+
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+
+    <div class="nav-actions" id="navMenu">
       <a class="username">userid</a>
-      <a href="home.html" class="nav-button">Home</a>
-      <a class="nav-button" href="index.html">Sign Out</a>
+      <a href="responses.html" class="nav-button">Lost and Found Items</a>
+      <a class="nav-button" href="index.html" onclick='localStorage.removeItem("Username")'>Sign Out</a>
     </div>
   </nav>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("navMenu").classList.toggle("active");
+    }
+  </script>
 
   <main class="main-content">
     <div class="page-header">
@@ -40,8 +50,7 @@
       </div>
     </div>
     <div id="items-root"></div>
-  </main>
-  
+  </main>  
 
   <script>
     const userid = localStorage.getItem("Username");  
