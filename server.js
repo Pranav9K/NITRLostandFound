@@ -233,8 +233,6 @@ app.delete('/api/items/:id', async (req, res) => {
   }
 });
 
-const fetch = require("node-fetch");
-
 
 app.post("/api/match-image", async (req, res) => {
   try {
