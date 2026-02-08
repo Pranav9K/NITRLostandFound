@@ -7,8 +7,16 @@
   box-sizing: border-box;
 }
 
+.montserrat{
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200px;
+  font-style: normal;
+}
+
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Montserrat', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 600;
   background: url("https://i.postimg.cc/3Jpg758L/NIT-Rourkela-1200x768.jpg") center/cover no-repeat fixed;
   min-height: 100vh;
   position: relative;
