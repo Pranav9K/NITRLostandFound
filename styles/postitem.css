@@ -38,7 +38,7 @@ body::before {
 
 .navbar:hover { background: rgba(0,0,0,0.75); }
 
-.logo { display: flex; gap: 10px; transition: 0.3s; }
+.logo { display: flex; gap: 10px; transition: 0.3s; align-items: center; }
 .logo:hover { transform: scale(1.07); }
 .logo-img { height: 42px; }
 .logo-text { font-size: 1.25rem; font-weight: 700; }
