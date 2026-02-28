@@ -43,7 +43,7 @@ body::before {
 .logo { display: flex; gap: 10px; transition: 0.3s; align-items: center; }
 .logo:hover { transform: scale(1.07); }
 .logo-img { height: 42px; }
-.logo-text { font-size: 1.25rem; font-weight: 700; }
+.logo-text { font-size: 1.25rem; font-weight: 700; font-family: 'Montserrat', sans-serif; }
 
 .nav-actions {
   display: flex;
@@ -59,6 +59,8 @@ body::before {
   border-radius: 12px;
   color: #fff;
   text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
   transition: 0.25s ease;
 }
 

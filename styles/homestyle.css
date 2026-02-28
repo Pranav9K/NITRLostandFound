@@ -71,6 +71,7 @@ nav:hover {
 .logo-text {
   font-size: 1.25rem;
   font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .nav-actions {
@@ -86,6 +87,8 @@ nav:hover {
   border-radius: 12px;
   color: #fff;
   text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
   transition: 0.25s ease;
 }
 
