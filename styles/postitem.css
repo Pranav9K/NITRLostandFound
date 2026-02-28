@@ -1,7 +1,7 @@
 /* ============================================= */
 /* RESET + BACKGROUND */
 /* ============================================= */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', 'Inter', sans-serif; }
 
 body {
   font-family: 'Montserrat', 'Inter', sans-serif;
@@ -132,6 +132,7 @@ body::before {
   background: rgba(0,0,0,0.45);
   color: white;
   border: 1px solid rgba(255,255,255,0.15);
+  font-family: 'Montserrat', 'Inter', sans-serif;
 }
 
 .item-form input:focus,
@@ -149,6 +150,7 @@ body::before {
   color: white;
   font-weight: 700;
   font-size: 1.1rem;
+  font-family: 'Montserrat', 'Inter', sans-serif;
   cursor: pointer;
   transition: 0.25s ease;
 }

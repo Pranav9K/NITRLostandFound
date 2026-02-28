@@ -5,6 +5,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Montserrat', 'Inter', sans-serif;
 }
 
 body {
@@ -145,6 +146,7 @@ body::before {
   border-radius: 30px;
   color: white;
   font-size: 1rem;
+  font-family: 'Montserrat', 'Inter', sans-serif;
   backdrop-filter: blur(10px);
   cursor: pointer;
   transition: 0.25s ease;
@@ -225,6 +227,7 @@ body::before {
 /* Content */
 .item-content {
   padding: 1.2rem;
+  font-family: 'Montserrat', 'Inter', sans-serif;
 }
 
 .item-content h2 {
@@ -256,6 +259,7 @@ body::before {
   cursor: pointer;
   font-size: 0.95rem;
   font-weight: 700;
+  font-family: 'Montserrat', 'Inter', sans-serif;
   color: black;
   transition: 0.25s;
 }
