@@ -599,9 +599,7 @@ body::before {
   text-align: center;
 }
 
-/* ============================================================
-   RESPONSIVE FIXES
-   ============================================================ */
+
 @media (max-width: 500px) {
   .page-title { font-size: 2.3rem; }
 
@@ -618,12 +616,12 @@ body::before {
   }
 }
 
-/* Center the "No items" / "Error loading items" box */
+
 #items-root > div:first-child:not(.filter-container) {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;       /* ensures text inside is centered */
-  margin: 2rem auto;        /* centers the box horizontally */
+  text-align: center;     
+  margin: 2rem auto;        
   max-width: 600px;
 }
